@@ -1,0 +1,18 @@
+_Init_Uart: CODE, 877 0 29
+_remote_timer_task: CODE, 463 0 135
+_sys_init: CODE, 925 0 18
+_ISR: CODE, 4 0 16
+_main: CODE, 958 0 14
+_even_check: CODE, 943 0 15
+_sys_task: CODE, 1000 0 6
+_DEcrypt: CODE, 273 0 183
+__keeloq_decrypt: CODE, 1006 0 5
+_Uart1SendByte: CODE, 906 0 19
+_init_timer0: CODE, 985 0 9
+_main_process: CODE, 63 0 198
+_remote_gkey: CODE, 610 0 122
+_remote_hits: CODE, 732 0 104
+_init_fosc: CODE, 1011 0 4
+_de_code_open: CODE, 1015 0 3
+_getBit: CODE, 836 0 41
+Total: 921

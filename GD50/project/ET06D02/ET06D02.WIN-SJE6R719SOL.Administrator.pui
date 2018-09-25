@@ -1,0 +1,43 @@
+[Folders]
+.\=1
+.\ - source=1
+.\ - source - drivers=1
+.\ - source - etapps=1
+.\ - source - globals=1
+.\ - source - prjlnks=1
+.\ - source - startup=1
+
+[Open Files]
+Active File Display Mode=1
+Active File Index=0
+Open File Line0=6112
+Open File Line1=0
+Open File Line2=10343
+Open File Line3=0
+Open File Line4=4569
+Open File Line5=3229
+Open File Pos0=6594
+Open File Pos1=80
+Open File Pos2=12990
+Open File Pos3=204
+Open File Pos4=5221
+Open File Pos5=4219
+Open File Window Pos0=0,1,-1,-1,-1,-1,5,27,1071,724
+Open File Window Pos1=0,1,-1,-1,-1,-1,5,27,1071,724
+Open File Window Pos2=0,1,-1,-1,-1,-1,5,27,1071,724
+Open File Window Pos3=0,1,-1,-1,-1,-1,5,27,1273,724
+Open File Window Pos4=0,1,-1,-1,-1,-1,5,27,1071,724
+Open File Window Pos5=0,1,-1,-1,-1,-1,5,27,1071,724
+Open File0=.\source\drivers\si_4355.c
+Open File1=.\source\drivers\si_4355.h
+Open File2=.\source\etapps\main.c
+Open File3=.\source\etapps\main.h
+Open File4=.\source\drivers\remote.c
+Open File5=.\source\globals\global.h
+Open File6=
+Remember Files=1
+
+[Project Information]
+Project Start=E207020001000500110035000F00000046
+Working Time=2000
+

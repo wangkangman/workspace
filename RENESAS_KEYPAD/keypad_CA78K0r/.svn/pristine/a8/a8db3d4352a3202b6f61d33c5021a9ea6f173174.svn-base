@@ -1,0 +1,92 @@
+; 78K0R C Compiler V2.72 Assembler Source        Date: 2 Sep 2017 Time:08:59:52
+
+; Command   : -cf10268 -yD:\CS+\CACX\Device\RL78\Devicefile Source\Driver\SN.c 
+;             -oDefaultBuild -_msgoff -qx3 -iSource\Driver\keeloq -iSource\Driv
+;             er\PFDL\incrl78 -iSource\Driver\PFDL -iSource\Driver -iSource\Glo
+;             bal -iSource\Application -i. -zps -mm -mi0 -g2
+; In-file   : Source\Driver\SN.c
+; Asm-file  : DefaultBuild\SN.asm
+; Para-file : 
+
+$PROCESSOR(F10268)
+$DEBUG
+$NODEBUGA
+$KANJICODE SJIS
+$TOL_INF	03FH, 0272H, 02H, 04000H, 00H, 00H, 00H
+
+$DGS	FIL_NAM, .file,		014H,	0FFFEH,	03FH,	067H,	01H,	00H
+$DGS	AUX_FIL, SN.c
+$DGS	MOD_NAM, SN,		00H,	0FFFEH,	00H,	077H,	00H,	00H
+$DGS	SEC_NAM, @@BITS,	U,	U,	00H,	078H,	00H,	00H
+$DGS	SEC_NAM, @@CNST,	U,	U,	00H,	078H,	00H,	00H
+$DGS	SEC_NAM, @@R_INIT,	U,	U,	00H,	078H,	00H,	00H
+$DGS	SEC_NAM, @@INIT,	U,	U,	00H,	078H,	00H,	00H
+$DGS	SEC_NAM, @@DATA,	U,	U,	00H,	078H,	00H,	00H
+$DGS	SEC_NAM, @@R_INIS,	U,	U,	00H,	078H,	00H,	00H
+$DGS	SEC_NAM, @@INIS,	U,	U,	00H,	078H,	00H,	00H
+$DGS	SEC_NAM, @@DATS,	U,	U,	00H,	078H,	00H,	00H
+$DGS	SEC_NAM, @@CNSTL,	U,	U,	00H,	078H,	00H,	00H
+$DGS	SEC_NAM, DFL_C,		U,	U,	00H,	078H,	00H,	00H
+$DGS	SEC_NAM, @@RLINIT,	U,	U,	00H,	078H,	00H,	00H
+$DGS	SEC_NAM, @@INITL,	U,	U,	00H,	078H,	00H,	00H
+$DGS	SEC_NAM, @@DATAL,	U,	U,	00H,	078H,	00H,	00H
+$DGS	SEC_NAM, @@CALT,	U,	U,	00H,	078H,	00H,	00H
+$DGS	SEC_NAM, @@CODE,	U,	U,	00H,	078H,	00H,	00H
+$DGS	SEC_NAM, @@CODEL,	U,	U,	00H,	078H,	00H,	00H
+$DGS	SEC_NAM, @@BASE,	U,	U,	00H,	078H,	00H,	00H
+$DGS	GLV_SYM, _SN,		U,	U,	0D00CH,	026H,	01H,	03H
+$DGS	AUX_STR, 00H,		00H,	04H,	04H,	00H,	00H,	00H,	00H
+
+	PUBLIC	_SN
+
+@@BITS	BSEG
+
+@@CNST	CSEG	MIRRORP
+
+@@R_INIT	CSEG	UNIT64KP
+
+@@INIT	DSEG	BASEP
+
+@@DATA	DSEG	BASEP
+
+@@R_INIS	CSEG	UNIT64KP
+
+@@INIS	DSEG	SADDRP
+
+@@DATS	DSEG	SADDRP
+
+DFL_C	CSEG	AT 1F00H
+_SN:	DB	011H	; 17
+	DB	022H	; 34
+	DB	033H	; 51
+	DB	044H	; 68
+
+@@RLINIT	CSEG	UNIT64KP
+
+@@INITL	DSEG	UNIT64KP
+
+@@DATAL	DSEG	UNIT64KP
+
+@@CALT	CSEG	CALLT0
+
+; line     1 : #include "SN.h"
+; line     2 : 
+; line     3 : 
+; line     4 : #pragma section @@CNSTL DFL_C AT 01F00H 
+; line     5 : __far const unsigned char SN[]={0x11,0x22,0x33,0x44}; 
+
+@@CODE	CSEG	BASE
+
+@@CODEL	CSEG
+
+@@BASE	CSEG	BASE
+
+@@CNSTL	CSEG	PAGE64KP
+
+	END
+
+
+; *** Code Information ***
+
+; Target chip : R5F10268
+; Device file : V1.12 

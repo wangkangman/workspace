@@ -1,0 +1,51 @@
+[Assembler]
+Cmd=castm8
+
+[Compiler]
+Cmd=cxstm8 -v +modsl +debug
+
+[Linker]
+Cmd=clnk -o test.sm8 test.lkf
+
+[Cobj]
+Cmd=cobj
+
+[Cprd]
+Cmd=cprd
+
+[Chex]
+Cmd=Chex
+
+[Clabs]
+Cmd=Clabs
+
+[Libs]
+Dir="D:\Program Files (x86)\COSMIC\CXSTM8\Lib"
+1=Stack Short
+2=Stack Long
+7=Stack Short 64K
+8=Stack Long 64K
+
+[Stack Short]
+1=libfs.sm8       (The Single Precision library)
+2=libis.sm8       (The Integer only library)
+3=libm.sm8       (The Machine library)
+
+[Stack Long]
+1=libfsl.sm8       (The Single Precision library)
+2=libisl.sm8       (The Integer only library)
+3=libm.sm8       (The Machine library)
+
+[Stack Short 64K]
+1=libfs0.sm8       (The Single Precision library)
+2=libis0.sm8       (The Integer only library)
+3=libm0.sm8       (The Machine library)
+
+[Stack Long 64K]
+1=libfsl0.sm8       (The Single Precision library)
+2=libisl0.sm8       (The Integer only library)
+3=libm0.sm8       (The Machine library)
+
+[DEFLIBS]
+1=libis.sm8
+2=libm.sm8

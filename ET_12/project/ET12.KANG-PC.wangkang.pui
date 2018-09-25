@@ -1,0 +1,27 @@
+[Folders]
+.\source\=1
+.\source\ - drivers=1
+.\source\ - etapps=1
+.\source\ - globals=1
+
+[Open Files]
+Active File Display Mode=1
+Active File Index=0
+Open File Line0=11183
+Open File Line1=6004
+Open File Line2=4906
+Open File Pos0=12846
+Open File Pos1=9442
+Open File Pos2=2
+Open File Window Pos0=0,1,-1,-1,-1,-1,5,35,977,688
+Open File Window Pos1=0,1,-1,-1,-1,-1,5,35,977,688
+Open File Window Pos2=0,1,-1,-1,-1,-1,5,35,977,688
+Open File0=.\source\etapps\main.c
+Open File1=.\source\etapps\main.h
+Open File2=.\source\globals\global.h
+Open File3=
+Remember Files=1
+
+[Project Information]
+Project Start=E1070700020019000A002D002D0000006E
+

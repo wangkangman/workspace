@@ -1,0 +1,14 @@
+castm8
+G,-v,Verbose Mode,100
+G,-a,Absolute Assembler,101
+O,-b,Do not optimize branches,102
+M,-c,Output Cross References,103
+L,-ft,Force Title in Listing,104
+L,-ff,Use form feed in listing,105
+L,-l,Output a listing,106
+M,-pe,Make all equates Public,107
+M,-p,Make all symbols Public,108
+M,-pl,Keep All local symbols,109
+G,-x,Include line debug information,110
+G,-xx,Include Full debug information,111
+M,-m,Accept old syntax,112

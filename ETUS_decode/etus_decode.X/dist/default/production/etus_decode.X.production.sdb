@@ -1,0 +1,346 @@
+[p LITE_MODE AUTOSTATIC PIC14 PIC14E ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F1823 ]
+[d frameptr 6 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"86 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\pic\eeprom.c
+[v _eecpymem eecpymem `(v  1 e 1 0 ]
+"39
+[v _memcpyee memcpyee `(v  1 e 1 0 ]
+"5 Z:\ETUS_decode\etus_decode.X\source/clkset.c
+[v _init_fosc init_fosc `(v  1 e 1 0 ]
+"79 Z:\ETUS_decode\etus_decode.X\source/keeloq.c
+[v _DEcrypt DEcrypt `(*.4uc  1 e 1 0 ]
+"105
+[v _getBit getBit `(uc  1 e 1 0 ]
+"129
+[v _RRC RRC `(*.1uc  1 e 1 0 ]
+"34 Z:\ETUS_decode\etus_decode.X\source/main.c
+[v _main main `(i  1 e 2 0 ]
+"43
+[v _sys_init sys_init `(v  1 s 1 sys_init ]
+"55
+[v _main_process main_process `(v  1 s 1 main_process ]
+"68
+[v _data_construct data_construct `(v  1 e 1 0 ]
+"15 Z:\ETUS_decode\etus_decode.X\source/remote.c
+[v _remote_init remote_init `(v  1 e 1 0 ]
+"31
+[v _remote_timer_task remote_timer_task `(v  1 e 1 0 ]
+"71
+[v _remote_gkey remote_gkey `(uc  1 e 1 0 ]
+"117
+[v _remote_hits remote_hits `(uc  1 e 1 0 ]
+"4 Z:\ETUS_decode\etus_decode.X\source/SPI.c
+[v _SPI_init SPI_init `(v  1 e 1 0 ]
+"37
+[v _SPI_send_byte SPI_send_byte `(v  1 e 1 0 ]
+"46
+[v _SPI_send_string SPI_send_string `(v  1 e 1 0 ]
+"8 Z:\ETUS_decode\etus_decode.X\source/timer.c
+[v _init_timer0 init_timer0 `(v  1 e 1 0 ]
+"16
+[v _ISR ISR `II(v  1 e 1 0 ]
+"26
+[v _sys_task sys_task `(uc  1 e 1 0 ]
+"11 Z:\ETUS_decode\etus_decode.X\source/usart.c
+[v _Init_Uart Init_Uart `(v  1 e 1 0 ]
+"45
+[v _Uart1SendByte Uart1SendByte `(v  1 e 1 0 ]
+"58
+[v _Uart1SendString Uart1SendString `(v  1 e 1 0 ]
+"74
+[v _even_check even_check `(uc  1 e 1 0 ]
+"84
+[v _putchar putchar `(v  1 e 1 0 ]
+"949 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic16f1823.h
+[v _PIR1 PIR1 `VEuc  1 e 1 @17 ]
+"1056
+[v _TMR0 TMR0 `VEuc  1 e 1 @21 ]
+"1539
+[v _TRISC TRISC `VEuc  1 e 1 @142 ]
+"1696
+[v _OPTION_REG OPTION_REG `VEuc  1 e 1 @149 ]
+"1830
+[v _WDTCON WDTCON `VEuc  1 e 1 @151 ]
+"1947
+[v _OSCCON OSCCON `VEuc  1 e 1 @153 ]
+"2993
+[v _APFCON APFCON `VEuc  1 e 1 @285 ]
+"3420
+[v _TXREG TXREG `VEuc  1 e 1 @410 ]
+"3456
+[v _SPBRGL SPBRGL `VEuc  1 e 1 @411 ]
+"3506
+[v _SPBRGH SPBRGH `VEuc  1 e 1 @412 ]
+"3663
+[v _BAUDCON BAUDCON `VEuc  1 e 1 @415 ]
+"3773
+[v _WPUC WPUC `VEuc  1 e 1 @526 ]
+"3831
+[v _SSP1BUF SSP1BUF `VEuc  1 e 1 @529 ]
+"3869
+[v _SSP1ADD SSP1ADD `VEuc  1 e 1 @530 ]
+"3945
+[v _SSP1STAT SSP1STAT `VEuc  1 e 1 @532 ]
+"4067
+[v _SSP1CON1 SSP1CON1 `VEuc  1 e 1 @533 ]
+"5659
+[v _ADDEN ADDEN `VEb  1 e 0 @3307 ]
+"5723
+[v _BRG16 BRG16 `VEb  1 e 0 @3323 ]
+"5725
+[v _BRGH BRGH `VEb  1 e 0 @3314 ]
+"5905
+[v _CREN CREN `VEb  1 e 0 @3308 ]
+"5907
+[v _CSRC CSRC `VEb  1 e 0 @3319 ]
+"5951
+[v _FERR FERR `VEb  1 e 0 @3306 ]
+"5963
+[v _GIE GIE `VEb  1 e 0 @95 ]
+"6115
+[v _OERR OERR `VEb  1 e 0 @3305 ]
+"6197
+[v _RC3 RC3 `VEb  1 e 0 @115 ]
+"6201
+[v _RC5 RC5 `VEb  1 e 0 @117 ]
+"6215
+[v _RX9 RX9 `VEb  1 e 0 @3310 ]
+"6255
+[v _SPEN SPEN `VEb  1 e 0 @3311 ]
+"6265
+[v _SREN SREN `VEb  1 e 0 @3309 ]
+"6303
+[v _SSP1IF SSP1IF `VEb  1 e 0 @139 ]
+"6335
+[v _SYNC SYNC `VEb  1 e 0 @3316 ]
+"6341
+[v _T0IE T0IE `VEb  1 e 0 @93 ]
+"6343
+[v _T0IF T0IF `VEb  1 e 0 @90 ]
+"6397
+[v _TMR0IF TMR0IF `VEb  1 e 0 @90 ]
+"6447
+[v _TRMT TRMT `VEb  1 e 0 @3313 ]
+"6465
+[v _TX9 TX9 `VEb  1 e 0 @3318 ]
+"6467
+[v _TX9D TX9D `VEb  1 e 0 @3312 ]
+"6471
+[v _TXEN TXEN `VEb  1 e 0 @3317 ]
+"8 Z:\ETUS_decode\etus_decode.X\source/keeloq.c
+[v _NLF NLF `DC[2][2][2][2][2]uc  1 e 32 0 ]
+[s S99 . 5 `us 1 delay0 2 0 `us 1 delay1 2 2 `uc 1 status 1 4 ]
+"11 Z:\ETUS_decode\etus_decode.X\source/main.c
+[v _sys_ctrl sys_ctrl `S99  1 s 5 sys_ctrl ]
+[s S168 . 14 `uc 1 st_last 1 0 :1:0 
+`uc 1 st_curt 1 0 :1:1 
+`uc 1 st_remo 1 0 :6:2 
+`uc 1 recvidx 1 1 `[8]uc 1 rbuf 8 2 `[4]uc 1 lbuf 4 10 ]
+"7 Z:\ETUS_decode\etus_decode.X\source/remote.c
+[v _remoter remoter `S168  1 s 14 remoter ]
+[s S175 . 1 `uc 1 delock 1 0 ]
+"8
+[v _de_code de_code `S175  1 s 1 de_code ]
+"13
+[v _CUSTOMER_code CUSTOMER_code `DC[8]uc  1 e 8 0 ]
+"6 Z:\ETUS_decode\etus_decode.X\source/timer.c
+[v _sys_cnt sys_cnt `uc  1 s 1 sys_cnt ]
+"34 Z:\ETUS_decode\etus_decode.X\source/main.c
+[v _main main `(i  1 e 2 0 ]
+{
+"41
+} 0
+"26 Z:\ETUS_decode\etus_decode.X\source/timer.c
+[v _sys_task sys_task `(uc  1 e 1 0 ]
+{
+"30
+} 0
+"43 Z:\ETUS_decode\etus_decode.X\source/main.c
+[v _sys_init sys_init `(v  1 s 1 sys_init ]
+{
+"53
+} 0
+"15 Z:\ETUS_decode\etus_decode.X\source/remote.c
+[v _remote_init remote_init `(v  1 e 1 0 ]
+{
+"16
+[v remote_init@index index `uc  1 a 1 3 ]
+"29
+} 0
+"8 Z:\ETUS_decode\etus_decode.X\source/timer.c
+[v _init_timer0 init_timer0 `(v  1 e 1 0 ]
+{
+"14
+} 0
+"5 Z:\ETUS_decode\etus_decode.X\source/clkset.c
+[v _init_fosc init_fosc `(v  1 e 1 0 ]
+{
+"10
+} 0
+"4 Z:\ETUS_decode\etus_decode.X\source/SPI.c
+[v _SPI_init SPI_init `(v  1 e 1 0 ]
+{
+"34
+} 0
+"11 Z:\ETUS_decode\etus_decode.X\source/usart.c
+[v _Init_Uart Init_Uart `(v  1 e 1 0 ]
+{
+"36
+} 0
+"55 Z:\ETUS_decode\etus_decode.X\source/main.c
+[v _main_process main_process `(v  1 s 1 main_process ]
+{
+"57
+[v main_process@buf buf `[8]uc  1 a 8 62 ]
+"65
+} 0
+"117 Z:\ETUS_decode\etus_decode.X\source/remote.c
+[v _remote_hits remote_hits `(uc  1 e 1 0 ]
+{
+[v remote_hits@buf buf `*.4uc  1 a 1 wreg ]
+"118
+[v remote_hits@rf_buf rf_buf `[8]uc  1 a 8 52 ]
+[v remote_hits@lrn_buf lrn_buf `[8]uc  1 a 8 44 ]
+[v remote_hits@index index `uc  1 a 1 60 ]
+"117
+[v remote_hits@buf buf `*.4uc  1 a 1 wreg ]
+"120
+[v remote_hits@buf buf `*.4uc  1 a 1 43 ]
+"141
+} 0
+"71
+[v _remote_gkey remote_gkey `(uc  1 e 1 0 ]
+{
+[v remote_gkey@pbuf pbuf `*.4uc  1 a 1 wreg ]
+"72
+[v remote_gkey@index index `uc  1 a 1 5 ]
+"71
+[v remote_gkey@pbuf pbuf `*.4uc  1 a 1 wreg ]
+"74
+[v remote_gkey@pbuf pbuf `*.4uc  1 a 1 4 ]
+"108
+} 0
+"79 Z:\ETUS_decode\etus_decode.X\source/keeloq.c
+[v _DEcrypt DEcrypt `(*.4uc  1 e 1 0 ]
+{
+[v DEcrypt@source source `*.4uc  1 a 1 wreg ]
+"81
+[v DEcrypt@bitk bitk `[4]uc  1 a 4 34 ]
+"82
+[v DEcrypt@index index `us  1 a 2 38 ]
+"81
+[v DEcrypt@res res `uc  1 a 1 33 ]
+"79
+[v DEcrypt@source source `*.4uc  1 a 1 wreg ]
+[v DEcrypt@_key _key `*.26uc  1 p 2 12 ]
+"83
+[v DEcrypt@source source `*.4uc  1 a 1 40 ]
+"95
+} 0
+"105
+[v _getBit getBit `(uc  1 e 1 0 ]
+{
+"107
+[v getBit@btidx btidx `uc  1 a 1 11 ]
+[v getBit@byidx byidx `uc  1 a 1 10 ]
+"105
+[v getBit@source source `*.26uc  1 p 2 2 ]
+[v getBit@n n `us  1 p 2 4 ]
+"118
+} 0
+"68 Z:\ETUS_decode\etus_decode.X\source/main.c
+[v _data_construct data_construct `(v  1 e 1 0 ]
+{
+[v data_construct@buf buf `*.4uc  1 a 1 wreg ]
+"69
+[v data_construct@temp_buf temp_buf `[8]uc  1 a 8 4 ]
+[v data_construct@index index `uc  1 a 1 12 ]
+"68
+[v data_construct@buf buf `*.4uc  1 a 1 wreg ]
+"70
+[v data_construct@buf buf `*.4uc  1 a 1 13 ]
+"82
+} 0
+"58 Z:\ETUS_decode\etus_decode.X\source/usart.c
+[v _Uart1SendString Uart1SendString `(v  1 e 1 0 ]
+{
+[v Uart1SendString@a a `*.4uc  1 a 1 wreg ]
+"59
+[v Uart1SendString@i i `uc  1 a 1 8 ]
+"58
+[v Uart1SendString@a a `*.4uc  1 a 1 wreg ]
+[v Uart1SendString@DatLong DatLong `uc  1 p 1 5 ]
+[v Uart1SendString@a a `*.4uc  1 a 1 7 ]
+"65
+} 0
+"74
+[v _even_check even_check `(uc  1 e 1 0 ]
+{
+[v even_check@data data `uc  1 a 1 wreg ]
+"75
+[v even_check@res res `uc  1 a 1 3 ]
+"74
+[v even_check@data data `uc  1 a 1 wreg ]
+[v even_check@data data `uc  1 a 1 4 ]
+"81
+} 0
+"46 Z:\ETUS_decode\etus_decode.X\source/SPI.c
+[v _SPI_send_string SPI_send_string `(v  1 e 1 0 ]
+{
+[v SPI_send_string@str str `*.4uc  1 a 1 wreg ]
+"47
+[v SPI_send_string@index_delay index_delay `uc  1 a 1 7 ]
+[v SPI_send_string@index index `uc  1 a 1 6 ]
+"46
+[v SPI_send_string@str str `*.4uc  1 a 1 wreg ]
+[v SPI_send_string@length length `uc  1 p 1 3 ]
+"48
+[v SPI_send_string@str str `*.4uc  1 a 1 5 ]
+"52
+} 0
+"37
+[v _SPI_send_byte SPI_send_byte `(v  1 e 1 0 ]
+{
+[v SPI_send_byte@data data `uc  1 a 1 wreg ]
+[v SPI_send_byte@data data `uc  1 a 1 wreg ]
+"39
+[v SPI_send_byte@data data `uc  1 a 1 2 ]
+"44
+} 0
+"16 Z:\ETUS_decode\etus_decode.X\source/timer.c
+[v _ISR ISR `II(v  1 e 1 0 ]
+{
+"24
+} 0
+"31 Z:\ETUS_decode\etus_decode.X\source/remote.c
+[v _remote_timer_task remote_timer_task `(v  1 e 1 0 ]
+{
+"33
+[v remote_timer_task@btidx btidx `uc  1 a 1 13 ]
+[v remote_timer_task@byidx byidx `uc  1 a 1 12 ]
+"32
+[v remote_timer_task@lv_cnt lv_cnt `uc  1 s 1 lv_cnt ]
+[v remote_timer_task@tp_cnt tp_cnt `uc  1 s 1 tp_cnt ]
+"69
+} 0
+"6 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+{
+"11
+[v ___awdiv@quotient quotient `i  1 a 2 7 ]
+"12
+[v ___awdiv@sign sign `uc  1 a 1 6 ]
+[v ___awdiv@counter counter `uc  1 a 1 5 ]
+"6
+[v ___awdiv@divisor divisor `i  1 p 2 0 ]
+[v ___awdiv@dividend dividend `i  1 p 2 2 ]
+"42
+} 0

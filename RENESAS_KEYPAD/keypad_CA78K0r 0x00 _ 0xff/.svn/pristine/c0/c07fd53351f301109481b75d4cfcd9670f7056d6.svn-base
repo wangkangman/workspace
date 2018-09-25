@@ -1,0 +1,508 @@
+
+
+
+78K0R Assembler V1.91                                                                                    Date:16 Oct 2017 Page:   1
+
+
+
+Command:  -cf10268 -yD:\CS+\CACX\Device\RL78\Devicefile Source\StartUp\cstart.asm -_msgoff -iSource\Driver\PFDL\incrl78 -iSource\Sta
+          rtUp -pDefaultBuild -oDefaultBuild -zs
+Para-file:
+In-file:  Source\StartUp\cstart.asm
+Obj-file: DefaultBuild\cstart.rel
+Prn-file: DefaultBuild\cstart.prn
+
+      Assemble list
+
+ ALNO  STNO ADRS   OBJECT   M I  SOURCE STATEMENT
+
+    1     1                      ; Copyright(c) 2006-2012 Renesas Electronics Corporation
+    2     2                      ; RENESAS ELECTRONICS CONFIDENTIAL AND PROPRIETARY.
+    3     3                      ; This program must be used solely for the purpose for which
+    4     4                      ; it was furnished by Renesas Electronics Corporation. No part of this
+    5     5                      ; program may be reproduced or disclosed to others, in any
+    6     6                      ; form, without the prior written permission of Renesas Electronics
+    7     7                      ; Corporation.
+    8     8                      ;-------------------------------------
+    9     9                      ;       W-1     cstart
+   10    10                      ;
+   11    11                      ;-------------------------------------
+   12    12                              NAME    @cstart
+   13    13                      
+   14    14                      $INCLUDE (def.inc)
+    1    15                   I1 ; Copyright(c) 2006-2011 Renesas Electronics Corporation
+    2    16                   I1 ; RENESAS ELECTRONICS CONFIDENTIAL AND PROPRIETARY.
+    3    17                   I1 ; This program must be used solely for the purpose for which
+    4    18                   I1 ; it was furnished by Renesas Electronics Corporation. No part of this
+    5    19                   I1 ; program may be reproduced or disclosed to others, in any
+    6    20                   I1 ; form, without the prior written permission of Renesas Electronics
+    7    21                   I1 ; Corporation.
+    8    22                   I1 ;-------------------------------------
+    9    23                   I1 ;
+   10    24                   I1 ;-------------------------------------
+   11    25                   I1 
+   12    26        (00000)    I1 _STATIC         EQU     0
+   13    27        (00000)    I1 _PASCAL         EQU     0
+   14    28                   I1 $IF (SAVERSVD)
+   15    29                   I1 _SAVERSVD       EQU     1
+   16    30                   I1 $ELSE
+   17    31        (00000)    I1 _SAVERSVD       EQU     0
+   18    32                   I1 $ENDIF
+   19    33        (00000)    I1 _OLDFUNC        EQU     0
+   20    34                   I1 
+   21    35                   I1 $IF (RL78_2)
+   22    36                   I1 _RL78_2         EQU     1
+   23    37                   I1 _XMAC           EQU     0
+   24    38                   I1 _XMULDIV        EQU     0
+   25    39                   I1 _XMUL           EQU     0
+   26    40                   I1 $ELSE
+   27    41        (00000)    I1 _RL78_2         EQU     0
+   28    42                   I1 $IF (XMAC)
+   29    43                   I1 _XMAC           EQU     1
+   30    44                   I1 _XMULDIV        EQU     1
+   31    45                   I1 _XMUL           EQU     1
+   32    46                   I1 $ELSE
+   33    47        (00000)    I1 _XMAC           EQU     0
+   34    48                   I1  $IF (XMULDIV)
+   35    49                   I1 _XMULDIV        EQU     1
+   36    50                   I1 _XMUL           EQU     1
+   37    51                   I1  $ELSE
+   38    52        (00000)    I1 _XMULDIV        EQU     0
+   39    53                   I1   $IF (XMUL)
+   40    54                   I1 _XMUL           EQU     1
+   41    55                   I1   $ELSE
+   42    56        (00000)    I1 _XMUL           EQU     0
+   43    57                   I1   $ENDIF
+   44    58                   I1  $ENDIF
+   45    59                   I1 $ENDIF
+   46    60                   I1 $ENDIF
+   47    61                   I1 
+   48    62                   I1 $IF (FLASH)
+   49    63                   I1 _FLASH          EQU     1
+   50    64                   I1 $ELSE
+   51    65        (00000)    I1 _FLASH          EQU     0
+   52    66                   I1 $ENDIF
+   53    67                   I1 
+   54    68                   I1 $IF (RAMFUNC)
+   55    69                   I1 _RAMFUNC        EQU     1
+   56    70                   I1 $ELSE
+   57    71        (00000)    I1 _RAMFUNC        EQU     0
+   58    72                   I1 $ENDIF
+   59    73                   I1 
+   60    74                   I1 $IF (MIRROR)
+   61    75                   I1 _MIRROR         EQU     1
+   62    76                   I1 $ELSE
+   63    77        (00000)    I1 _MIRROR         EQU     0
+   64    78                   I1 $ENDIF
+   65    79                   I1 
+   66    80                   I1 $IF (NOESCOPY)
+   67    81                   I1 _ESCOPY         EQU     0
+   68    82                   I1 $ELSE
+   69    83        (00001)    I1 _ESCOPY         EQU     1
+   70    84                   I1 $ENDIF
+   71    85                   I1 
+   72    86        (00001)    I1 _LIBCNSTFAR     EQU     1
+   73    87                   I1 
+   74    88                   I1 ; NEAR/FAR SWITCH
+   75    89                   I1 $IF (NEARFARSW)
+   76    90                   I1 _ORGFUNC        EQU     0
+   77    91                   I1 ; MEMORY MODEL
+   78    92                   I1 $IF (LARGE)
+   79    93                   I1 _CODEFAR        EQU     1
+   80    94                   I1 _DATAFAR        EQU     0
+   81    95                   I1 $ELSE
+   82    96                   I1  $IF (COMPACT)
+   83    97                   I1 _CODEFAR        EQU     1
+   84    98                   I1 _DATAFAR        EQU     0
+   85    99                   I1   $ELSE
+   86   100                   I1   $IF (MEDIUM)
+   87   101                   I1 _CODEFAR        EQU     1
+   88   102                   I1 _DATAFAR        EQU     1
+   89   103                   I1    $ELSE ; SMALL
+   90   104                   I1 _CODEFAR        EQU     1
+   91   105                   I1 _DATAFAR        EQU     1
+   92   106                   I1   $ENDIF
+   93   107                   I1  $ENDIF
+   94   108                   I1 $ENDIF
+   95   109                   I1 $ELSE   ; NORMAL
+   96   110        (00001)    I1 _ORGFUNC        EQU     1
+   97   111                   I1 ; MEMORY MODEL
+   98   112                   I1 $IF (LARGE)
+   99   113                   I1 _CODEFAR        EQU     1
+  100   114                   I1 _DATAFAR        EQU     1
+  101   115                   I1 $ELSE
+  102   116                   I1  $IF (COMPACT)
+  103   117                   I1 _CODEFAR        EQU     1
+  104   118                   I1 _DATAFAR        EQU     1
+  105   119                   I1   $ELSE
+  106   120                   I1   $IF (MEDIUM)
+  107   121                   I1 _CODEFAR        EQU     1
+  108   122                   I1 _DATAFAR        EQU     0
+  109   123                   I1    $ELSE ; SMALL
+  110   124        (00001)    I1 _CODEFAR        EQU     1
+  111   125        (00000)    I1 _DATAFAR        EQU     0
+  112   126                   I1   $ENDIF
+  113   127                   I1  $ENDIF
+  114   128                   I1 $ENDIF
+  115   129                   I1 $ENDIF
+  116   130                   I1 
+  117   131                   I1 $IF (DHRYSTONE)
+  118   132                   I1 _DHRYSTONE              EQU     1
+  119   133                   I1 $ELSE
+  120   134        (00000)    I1 _DHRYSTONE              EQU     0
+  121   135                   I1 $ENDIF
+  122   136                   I1 
+  123   137        (00001)    I1 _PATCH01        EQU     1       ;for 1st device
+   15   138                      $INCLUDE (macro.inc)
+    1   139                   I1 ; Copyright(c) 2006-2010 Renesas Electronics Corporation
+    2   140                   I1 ; RENESAS ELECTRONICS CONFIDENTIAL AND PROPRIETARY.
+    3   141                   I1 ; This program must be used solely for the purpose for which
+    4   142                   I1 ; it was furnished by Renesas Electronics Corporation. No part of this
+    5   143                   I1 ; program may be reproduced or disclosed to others, in any
+    6   144                   I1 ; form, without the prior written permission of Renesas Electronics
+    7   145                   I1 ; Corporation.
+    8   146                   I1 ;-------------------------------------
+    9   147                   I1 ;
+   10   148                   I1 ;-------------------------------------
+   16   149                      
+   17   150                      ;-----------------------------------------------------------------------------
+   18   151                      ; declaration of symbol
+   19   152                      ;
+   20   153                      ; attention):   change to EQU value 1 -> 0  if necessary
+   21   154                      ;-----------------------------------------------------------------------------
+   22   155                      ;
+   23   156        (00001)       BRKSW    EQU    1       ;brk,sbrk,calloc,free,malloc,realloc function use
+   24   157        (00001)       EXITSW   EQU    1       ;exit,atexit function use
+   25   158        (00001)       RANDSW   EQU    1       ;rand,srand  function use
+   26   159        (00001)       DIVSW    EQU    1       ;div         function use
+   27   160        (00001)       LDIVSW   EQU    1       ;ldiv        function use
+   28   161        (00001)       FLOATSW  EQU    1       ;floating point variables use
+   29   162        (00001)       STRTOKSW EQU    1       ;strtok      function use
+   30   163                      
+   31   164                              PUBLIC  _@cstart,_@cend
+   32   165                      
+   33   166                      $_IF(BRKSW)
+   34   167                              PUBLIC  _@BRKADR,_@MEMTOP,_@MEMBTM
+   35   168                      $ENDIF
+   36   169                      $_IF(EXITSW)
+   37   170                              PUBLIC  _@FNCTBL,_@FNCENT
+   38   171                      $ENDIF
+   39   172                      $_IF(RANDSW)
+   40   173                              PUBLIC  _@SEED
+   41   174                      $ENDIF
+   42   175                      $_IF(DIVSW)
+   43   176                              PUBLIC  _@DIVR
+   44   177                      $ENDIF
+   45   178                      $_IF(LDIVSW)
+   46   179                              PUBLIC  _@LDIVR
+   47   180                      $ENDIF
+   48   181                      $_IF(STRTOKSW)
+   49   182                              PUBLIC  _@TOKPTR
+   50   183                      $ENDIF
+   51   184                      $_IF(BRKSW OR FLOATSW)
+   52   185                              PUBLIC  _errno
+   53   186                      $ENDIF
+   54   187                      
+   55   188                      ;-----------------------------------------------------------------------------
+   56   189                      ; external declaration of symbol for stack area
+   57   190                      ;
+   58   191                      ; _@STBEG has value of the end address +1 of compiler's stack area.
+   59   192                      ; _@STEND has value of the start address of compiler's stack area.
+   60   193                      ; _@STBEG and _@STEND are created by linker with -S option.
+   61   194                      ; Accordingly, specify the -S option when linking.
+   62   195                      ;
+   63   196                      ; _@MAA has value of the mirror area.
+   64   197                      ; _@SADSIZ has value of the size of the saddr area.
+   65   198                      ; _@SADBEG has value of the start address of the saddr area.
+   66   199                      ;-----------------------------------------------------------------------------
+   67   200                              EXTRN   _main,_@STBEG,_@STEND,_stkinit,_hdwinit,_@SADSIZ,_@SADBEG
+   68   201                      $_IF(EXITSW)
+   69   202                              EXTRN   _exit
+   70   203                      $ENDIF
+   71   204                      $_IF(_MIRROR)
+   72   205                              EXTRN   _@MAA
+   73   206                      $ENDIF
+   74   207                      
+   75   208                      ;-----------------------------------------------------------------------------
+   76   209                      ; external declaration of label for ROMable
+   77   210                      ;-----------------------------------------------------------------------------
+   78   211                              EXTRN   _?R_INIT,_?RLINIT,_?R_INIS,_?DATA,_?DATAL,_?DATS
+   79   212                      
+   80   213                      ;-----------------------------------------------------------------------------
+   81   214                      ; allocation area which library uses
+   82   215                      ;
+   83   216                      ; _@FNCTBL      top address of area used in atexit function
+   84   217                      ; _@FNCENT      total number of functions registered by the atexit function
+   85   218                      ; _@SEED        sequence of pseudo-random numbers
+   86   219                      ; _@DIVR        a result of div library
+   87   220                      ; _@LDIVR       a result of ldiv library
+   88   221                      ; _@TOKPTR      pointer which strtok function uses
+   89   222                      ; _errno        errno number code
+   90   223                      ; _@MEMTOP      top address of area which memory management functions use
+   91   224                      ; _@MEMBTM      bottom address of area which memory management functions use
+   92   225                      ; _@BRKADR      break value
+   93   226                      ;-----------------------------------------------------------------------------
+   94   227 -----                @@DATA  DSEG    BASEP   ;near
+   95   228 00000                _@DATA:
+   96   229                      $_IF(EXITSW)
+   97   230 00000                _@FNCTBL:       DS      4*32
+   98   231 00080                _@FNCENT:       DS      2
+   99   232                      $ENDIF
+  100   233                      $_IF(RANDSW)
+  101   234 00082                _@SEED:         DS      4
+  102   235                      $ENDIF
+  103   236                      $_IF(DIVSW)
+  104   237 00086                _@DIVR:         DS      4
+  105   238                      $ENDIF
+  106   239                      $_IF(LDIVSW)
+  107   240 0008A                _@LDIVR:        DS      8
+  108   241                      $ENDIF
+  109   242                      $_IF(STRTOKSW)
+  110   243                      $_IF(_DATAFAR)
+  111   244                      _@TOKPTR:       DS      4
+  112   245                      $ELSE
+  113   246 00092                _@TOKPTR:       DS      2
+  114   247                      $ENDIF
+  115   248                      $ENDIF
+  116   249                      $_IF(BRKSW OR FLOATSW)
+  117   250 00094                _errno:         DS      2
+  118   251                      $ENDIF
+  119   252                      $_IF(BRKSW)
+  120   253 00096                _@BRKADR:       DS      2
+  121   254 00098                _@MEMTOP:       DS      32
+  122   255 000B8                _@MEMBTM:
+  123   256                      $ENDIF
+  124   257                      
+  125   258 -----                @@VECT00        CSEG    AT      0
+  126   259 00000 R0000                  DW      _@cstart
+  127   260                      
+  128   261 -----                @@LCODE CSEG    BASE
+  129   262                      
+  130   263 00000                _@cstart:
+  131   264                      ;-----------------------------------------------------------------------------
+  132   265                      ; setting the register bank RB0 as work register set
+  133   266                      ;-----------------------------------------------------------------------------
+  134   267 00000  61CF                  SEL     RB0
+  135   268                      ;-----------------------------------------------------------------------------
+  136   269                      ; setting the mirror area
+  137   270                      ;-----------------------------------------------------------------------------
+  138   271                      $_IF(_MIRROR)
+  139   272                              MOV     A,#_@MAA
+  140   273                              MOV1    CY,A.0
+  141   274                              MOV1    MAA,CY
+  142   275                      $ENDIF
+  143   276                      ;-----------------------------------------------------------------------------
+  144   277                      ; setting the stack pointer
+  145   278                      ;
+  146   279                      ; _@STBEG is created by linker with -S option.
+  147   280                      ;-----------------------------------------------------------------------------
+  148   281 00002 RCBF80000              MOVW    SP,#LOWW _@STBEG        ;SP <- stack begin address
+  149   282                      
+  150   283                      ;-----------------------------------------------------------------------------
+  151   284                      ; hardware initialization
+  152   285                      ;-----------------------------------------------------------------------------
+  153   286                              ;CALL   !!_hdwinit
+  154   287                      
+  155   288                      ;-----------------------------------------------------------------------------
+  156   289                      ; clear stack area
+  157   290                      ;
+  158   291                      ; _@STEND is created by linker with -S option.
+  159   292                      ;-----------------------------------------------------------------------------
+  160   293                              ;MOVW   HL,#LOWW _@STEND        ;HL <- stack end address
+  161   294                              ;CALL   !!_stkinit
+  162   295                      
+  163   296                      ;-----------------------------------------------------------------------------
+  164   297                      ; clear saddr
+  165   298                      ;-----------------------------------------------------------------------------
+  166   299 00006 R5300                  MOV     B,#_@SADSIZ     ;0FEDFH - _@SADBEG + 1
+  167   300 00008  F6                    CLRW    AX
+  168   301 00009                LSADR1:
+  169   302 00009  93                    DEC     B
+  170   303 0000A  93                    DEC     B
+  171   304 0000B R580000                MOVW    _@SADBEG[B],AX
+  172   305 0000E  DFF9                  BNZ     $LSADR1
+  173   306                      
+  174   307                      ;-----------------------------------------------------------------------------
+  175   308                      ; ROM data copy
+  176   309                      ;-----------------------------------------------------------------------------
+  177   310                      
+  178   311                      ; copy external variables having initial value
+  179   312                      $_IF(_ESCOPY)
+  180   313 00010 R4100                  MOV     ES,#HIGHW _@R_INIT
+  181   314                      $ENDIF
+  182   315 00012 R360000                MOVW    HL,#LOWW _@R_INIT
+  183   316 00015 R340000                MOVW    DE,#LOWW _@INIT
+  184   317 00018  EF05                  BR      $LINIT2
+  185   318 0001A                LINIT1:
+  186   319                      $_IF(_ESCOPY)
+  187   320 0001A  118B                  MOV     A,ES:[HL]
+  188   321                      $ELSE
+  189   322                              MOV     A,[HL]
+  190   323                      $ENDIF
+  191   324 0001C  99                    MOV     [DE],A
+  192   325 0001D  A7                    INCW    HL
+  193   326 0001E  A5                    INCW    DE
+  194   327 0001F                LINIT2:
+  195   328 0001F  17                    MOVW    AX,HL
+  196   329 00020 R440000                CMPW    AX,#LOWW _?R_INIT
+  197   330 00023  DFF5                  BNZ     $LINIT1
+  198   331                      $_IF(_DATAFAR)
+  199   332                      ; copy external variables having initial value
+  200   333                              MOVW    HL,#LOWW _@RLINIT
+  201   334                              MOVW    DE,#LOWW _@INITL
+  202   335                              BR      $LINIT4
+  203   336                      LINIT3:
+  204   337                              MOV     ES,#HIGHW _@RLINIT
+  205   338                              MOV     A,ES:[HL]
+  206   339                              MOV     ES,#HIGHW _@INITL
+  207   340                              MOV     ES:[DE],A
+  208   341                              INCW    HL
+  209   342                              INCW    DE
+  210   343                      LINIT4:
+  211   344                              MOVW    AX,HL
+  212   345                              CMPW    AX,#LOWW _?RLINIT
+  213   346                              BNZ     $LINIT3
+  214   347                      $ENDIF
+  215   348                      ; copy external variables which doesn't have initial value
+  216   349 00025 R360000                MOVW    HL,#LOWW _@DATA
+  217   350 00028 R300000                MOVW    AX,#LOWW _?DATA
+  218   351 0002B  EF04                  BR      $LDATA2
+  219   352 0002D                LDATA1:
+  220   353 0002D  CC0000                MOV     [HL+0],#0
+  221   354 00030  A7                    INCW    HL
+  222   355 00031                LDATA2:
+  223   356 00031  47                    CMPW    AX,HL
+  224   357 00032  DFF9                  BNZ     $LDATA1
+  225   358                      $_IF(_DATAFAR)
+  226   359                      ; copy external variables which doesn't have initial value
+  227   360                              MOV     ES,#HIGHW _@DATAL
+  228   361                              MOVW    HL,#LOWW _@DATAL
+  229   362                              MOVW    AX,#LOWW _?DATAL
+  230   363                              BR      $LDATA4
+  231   364                      LDATA3:
+  232   365                              MOV     ES:[HL+0],#0
+  233   366                              INCW    HL
+  234   367                      LDATA4:
+  235   368                              CMPW    AX,HL
+  236   369                              BNZ     $LDATA3
+  237   370                      $ENDIF
+  238   371                      ; copy sreg variables having initial value
+  239   372                      $_IF(_ESCOPY)
+  240   373 00034 R4100                  MOV     ES,#HIGHW _@R_INIS
+  241   374                      $ENDIF
+  242   375 00036 R360000                MOVW    HL,#LOWW _@R_INIS
+  243   376 00039 R340000                MOVW    DE,#LOWW _@INIS
+  244   377 0003C  EF05                  BR      $LINIS2
+  245   378 0003E                LINIS1:
+  246   379                      $_IF(_ESCOPY)
+  247   380 0003E  118B                  MOV     A,ES:[HL]
+  248   381                      $ELSE
+  249   382                              MOV     A,[HL]
+  250   383                      $ENDIF
+  251   384 00040  99                    MOV     [DE],A
+  252   385 00041  A7                    INCW    HL
+  253   386 00042  A5                    INCW    DE
+  254   387 00043                LINIS2:
+  255   388 00043  17                    MOVW    AX,HL
+  256   389 00044 R440000                CMPW    AX,#LOWW _?R_INIS
+  257   390 00047  DFF5                  BNZ     $LINIS1
+  258   391                      
+  259   392                      ; copy sreg variables which doesn't have initial value
+  260   393 00049 R360000                MOVW    HL,#LOWW _@DATS
+  261   394 0004C R300000                MOVW    AX,#LOWW _?DATS
+  262   395 0004F  EF04                  BR      $LDATS2
+  263   396 00051                LDATS1:
+  264   397 00051  CC0000                MOV     [HL+0],#0
+  265   398 00054  A7                    INCW    HL
+  266   399 00055                LDATS2:
+  267   400 00055  47                    CMPW    AX,HL
+  268   401 00056  DFF9                  BNZ     $LDATS1
+  269   402                      
+  270   403                      ;-----------------------------------------------------------------------------
+  271   404                      ; initializing _@SEED as 1
+  272   405                      ;
+  273   406                      ; Pseudo-random sequence is decided by _@SEED value. This value can be set by
+  274   407                      ; srand function. If rand is called before srand, the random sequence will
+  275   408                      ; be the same as when srand is called with a _@SEED value as 1 at first.
+  276   409                      ;-----------------------------------------------------------------------------
+  277   410                      $_IF(RANDSW)
+  278   411 00058  F6                    CLRW    AX
+  279   412 00059 RBF8400                MOVW    !_@SEED+2,AX
+  280   413 0005C  E6                    ONEW    AX
+  281   414 0005D RBF8200                MOVW    !_@SEED,AX      ;SEED <- 1
+  282   415                      $ENDIF
+  283   416                      ;-----------------------------------------------------------------------------
+  284   417                      ; setting _@MEMTOP address to _@BRKADR
+  285   418                      ;-----------------------------------------------------------------------------
+  286   419                      $_IF(BRKSW)
+  287   420 00060 R309800                MOVW    AX,#_@MEMTOP
+  288   421 00063 RBF9600                MOVW    !_@BRKADR,AX    ;BRKADR <- #MEMTOP
+  289   422                      $ENDIF
+  290   423                      
+  291   424                      ;-----------------------------------------------------------------------------
+  292   425                      ; call main function
+  293   426                      ;-----------------------------------------------------------------------------
+  294   427 00066 RFC000000              CALL    !!_main         ;main();
+  295   428                      ;-----------------------------------------------------------------------------
+  296   429                      ; call exit function
+  297   430                      ;-----------------------------------------------------------------------------
+  298   431                      $_IF(EXITSW)
+  299   432 0006A  F6                    CLRW    AX
+  300   433 0006B RFC000000              CALL    !!_exit         ;exit(0);
+  301   434                      $ENDIF
+  302   435 0006F  EFFE                  BR      $$
+  303   436                      ;
+  304   437 00071                _@cend:
+  305   438                      ;-----------------------------------------------------------------------------
+  306   439                      ; define segment and label used by ROMable processing
+  307   440                      ;-----------------------------------------------------------------------------
+  308   441 -----                @@R_INIT        CSEG    UNIT64KP
+  309   442 00000                _@R_INIT:
+  310   443                      $_IF(_DATAFAR)
+  311   444                      @@RLINIT        CSEG    UNIT64KP
+  312   445                      _@RLINIT:
+  313   446                      $ENDIF
+  314   447 -----                @@R_INIS        CSEG    UNIT64KP
+  315   448 00000                _@R_INIS:
+  316   449 -----                @@INIT  DSEG    BASEP
+  317   450 00000                _@INIT:
+  318   451                      $_IF(_DATAFAR)
+  319   452                      @@INITL DSEG    UNIT64KP
+  320   453                      _@INITL:
+  321   454                      $ENDIF
+  322   455                      $_IF(_DATAFAR)
+  323   456                      @@DATAL DSEG    UNIT64KP
+  324   457                      _@DATAL:
+  325   458                      $ENDIF
+  326   459 -----                @@INIS  DSEG    SADDRP
+  327   460 00000                _@INIS:
+  328   461 -----                @@DATS  DSEG    SADDRP
+  329   462 00000                _@DATS:
+  330   463 -----                @@CALT  CSEG    CALLT0
+  331   464 -----                @@CNST  CSEG    MIRRORP
+  332   465 -----                @@CNSTL CSEG    PAGE64KP
+  333   466 -----                @@BITS  BSEG
+  334   467                      ;
+  335   468                              END
+
+Segment informations:
+
+ADRS  LEN      NAME
+
+00000 000B8H   @@DATA
+00000 00002H   @@VECT00
+00000 00071H   @@LCODE
+00000 00000H   @@R_INIT
+00000 00000H   @@R_INIS
+00000 00000H   @@INIT
+00000 00000H   @@INIS
+00000 00000H   @@DATS
+00000 00000H   @@CALT
+00000 00000H   @@CNST
+00000 00000H   @@CNSTL
+00000 00000H.0 @@BITS
+
+ Target chip : R5F10268
+ Device file : V1.12
+Assembly complete,     0 error(s) and     0 warning(s) found. (    0)
+

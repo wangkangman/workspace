@@ -1,0 +1,77 @@
+		-------------------------------
+		Release Notes for STM8 Compiler
+		-------------------------------
+
+V4.2.4:
+------
+	. The compiler is using relative jump tables in the code itself when
+	  using a large model allowing a function using a switch to be located
+	  across a 64K sector boundary.
+
+	. The compiler provides new startup routines allowing the init table
+	  to be located outside the first 64K sector.
+
+	. The code generator produces a better code when toggling _Bool or
+	  one bit bitfield variables.
+
+	. The optimizer has been enhanced to produce a better code when
+	  accessing arrays with a computed index.
+
+V4.2.3:
+------
+	. The compiler has been enhanced to produce a better code when
+	  comnputing several consecutive local object addresses.
+
+	. The compiler was building a wrong addressing mode when using a
+	  negative offset on a pointer.
+
+	. The code generator was reverting arguments when implementing a
+	  structure assignment with both structures accessed by pointer.
+
+	. The optimizer was wrongly clearing a memory location when preceded
+	  by a clear of the X register.
+
+V4.2.2:
+------
+	. The compiler was producing a wrong instruction when setting a one
+	  bit bitfield with a pointer.
+
+	. The code generator was not saving the A register when using a 32
+	  bit subtract followed by a shift.
+
+	. The switch statement on a long expression was failing with models
+	  smaller than 64K 
+
+	. The optimizer was not updating an integer loop index in memory when
+	  its value was read as a byte inside the loop.
+
+V4.2.1:
+------
+	. The compiler was not properly sign extending the 8 bit result
+	  of a modulo operation between an int and a signed char.
+
+	. The compiler was wrongly propagating a negative offset on a 16
+	  bits address thus allowing a wrong location to be accessed as the
+	  processor produces a 17 bits offset.
+
+	. The optimizer was wrongly removing a load from the long accumulator
+	  when using the +compact option and when the accumulator was set only
+	  by calls to machine library routines.
+
+V4.1.3:
+------
+	. The compiler was not accessing properly @far bitfields
+	. The _Bool variables can be located anywhere in the sector 0
+	. The @vector modifier is implemented for interrupt vectors
+
+V4.1.2:
+------
+	. The compiler implements the extra instruction of the V2 core
+
+V4.1.1:
+------
+	. The standard test suites have been passed
+
+V4.1.0:
+------
+	. The optimizer is implemented

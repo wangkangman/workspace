@@ -1,0 +1,215 @@
+C51 COMPILER V9.52.0.0   MAIN                                                              08/31/2018 11:15:45 PAGE 1   
+
+
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Output\main.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE Code\main.c OPTIMIZE(0,SPEED) BROWSE INCDIR(..\Include) DEFINE(FOSC_160000)
+                    - DEBUG OBJECTEXTEND PRINT(.\LST\main.lst) TABS(2) OBJECT(.\Output\main.obj)
+
+line level    source
+
+   1          /*--------------------------------------------------------------------------------------------------------
+             --*/
+   2          /*                                                                                                        
+             - */
+   3          /* Copyright(c) 2017 Nuvoton Technology Corp. All rights reserved.                                        
+             - */
+   4          /*                                                                                                        
+             - */
+   5          /*--------------------------------------------------------------------------------------------------------
+             --*/
+   6          
+   7          //********************************************************************************************************
+             -***
+   8          //  Nuvoton Technoledge Corp. 
+   9          //  Website: http://www.nuvoton.com
+  10          //  E-Mail : MicroC-8bit@nuvoton.com
+  11          //  Date   : Apr/21/2017
+  12          //********************************************************************************************************
+             -***
+  13          
+  14          //********************************************************************************************************
+             -***
+  15          //  File Function: N76E003 Timer0/1 Mode0 demo code
+  16          //********************************************************************************************************
+             -***
+  17          #include "N76E003.h"
+  18          #include "Common.h"
+  19          #include "Delay.h"
+  20          #include "SFR_Macro.h"
+  21          #include "Function_define.h"
+  22          /* app typedef */
+  23          #include "main.h"
+  24          
+  25          //*****************  The Following is in define in Fucntion_define.h  ***************************
+  26          //****** Always include Function_define.h call the define you want, detail see main(void) *******
+  27          //***********************************************************************************************
+  28          #if 0
+              //#define   TIMER1_MODE0_ENABLE   TMOD&=0x0F
+              //#define   TIMER1_MODE1_ENABLE   TMOD&=0x0F;TMOD|=0x10
+              //#define   TIMER1_MODE2_ENABLE   TMOD&=0x0F;TMOD|=0x20
+              //#define   TIMER1_MODE3_ENABLE   TMOD&=0x0F;TMOD|=0x3F
+              
+              //#define   TIMER0_MODE0_ENABLE   TMOD&=0xF0
+              //#define   TIMER0_MODE1_ENABLE   TMOD&=0xF0;TMOD|=0x01
+              //#define   TIMER0_MODE2_ENABLE   TMOD&=0xF0;TMOD|=0x02
+              //#define   TIMER0_MODE3_ENABLE   TMOD&=0xF0;TMOD|=0xF3
+              #endif
+  39          #if 0
+              #define TH0_INIT        0xFC //5.0ms@XTAL=12MHz, Period = (10.85/2) ms@XTAL=22.1184MHz
+              #define TL0_INIT        0x0F // 64527
+              #endif
+  43          
+  44          
+  45          #define TH0_INIT        0xF3 //5.0ms@XTAL=12MHz, Period = (10.85/2) ms@XTAL=22.1184MHz
+C51 COMPILER V9.52.0.0   MAIN                                                              08/31/2018 11:15:45 PAGE 2   
+
+  46          #define TL0_INIT        0x37
+  47          
+  48          #define TH1_INIT        0xE0 //2.5ms@XTAL=12MHz, Period = (5.425/2) ms@XTAL=22.1184MHz
+  49          #define TL1_INIT        0x00
+  50          
+  51          
+  52          static INFRARED infra;
+  53          
+  54          /*********************************************************************************************************
+             -***
+  55          *    TIMER 0 interrupt subroutine
+  56          **********************************************************************************************************
+             -**/
+  57          void Timer0_ISR (void) interrupt 1          //interrupt address is 0x000B
+  58          {
+  59   1          TH0 = TH0_INIT;
+  60   1          TL0 = TL0_INIT;
+  61   1        
+  62   1          infra.lst_sta = infra.cur_sta;
+  63   1          infra.cur_sta = P17;
+  64   1          
+  65   1        
+  66   1          if (infra.lst_sta == infra.cur_sta) {
+  67   2            if (infra.cnt < INFRA_OVERFLOW){
+  68   3              infra.cnt++;
+  69   3            }
+  70   2            else {
+  71   3              infra.flag = 1;
+  72   3              infra.pulse_cnt = 0;
+  73   3            }
+  74   2          } 
+  75   1          /* get pulse */ 
+  76   1          else {
+  77   2            infra.cnt = 0;
+  78   2            
+  79   2            /* filter */
+  80   2            if (infra.pulse_cnt < 4) infra.pulse_cnt++;
+  81   2            
+  82   2            if (infra.pulse_cnt == 4) 
+  83   2              infra.flag = 0;
+  84   2          }// GPIO toggle when interrupt
+  85   1      }
+  86          /*********************************************************************************************************
+             -***
+  87          *    TIMER 1 interrupt subroutine
+  88          **********************************************************************************************************
+             -**/
+  89          void Timer1_ISR (void) interrupt 3          //interrupt address is 0x001B
+  90          {
+  91   1          TH1 = TH1_INIT;
+  92   1          TL1 = TL1_INIT;   
+  93   1          P03 = ~P03;                             // GPIO toggle when interrupt
+  94   1      }
+  95          
+  96          void main (void)
+  97          {
+  98   1        TMOD = 0XFF;
+  99   1        Set_All_GPIO_Quasi_Mode;
+ 100   1        P17_Input_Mode;
+ 101   1        P12_PushPull_Mode;
+ 102   1        P05_PushPull_Mode;
+ 103   1        
+C51 COMPILER V9.52.0.0   MAIN                                                              08/31/2018 11:15:45 PAGE 3   
+
+ 104   1        /* infra init */
+ 105   1        infra.cnt     = 0;
+ 106   1        infra.flag    = 0;
+ 107   1        infra.cur_sta = 1;
+ 108   1        infra.lst_sta = 1;
+ 109   1        infra.pulse_cnt = 0;
+ 110   1        
+ 111   1        /* 200us timer init */
+ 112   1        TIMER0_MODE1_ENABLE;                        //Timer 0 and Timer 1 mode configuration  
+ 113   1        set_T0M;
+ 114   1        TH0 = TH0_INIT;
+ 115   1        TL0 = TL0_INIT;    
+ 116   1        set_ET0;                                    //enable Timer0 interrupt
+ 117   1        set_EA;                                     //enable interrupts 
+ 118   1        set_TR0;                                    //Timer0 run
+ 119   1      
+ 120   1      //  P05 = 0;
+ 121   1        while(1)
+ 122   1        {
+ 123   2          if (infra.flag == 1) {
+ 124   3            P12 = 1; //relay
+ 125   3            P05 = 1; //led
+ 126   3          }   
+ 127   2          else {
+ 128   3            P12 = 0;
+ 129   3            P05 = 0;      
+ 130   3          }   
+ 131   2        }
+ 132   1      }
+ 133          /*********************************************************************************************************
+             -***
+ 134          *    Main function 
+ 135          **********************************************************************************************************
+             -**/
+ 136          #if 0
+              void main (void)
+              {
+                TMOD = 0XFF;
+                Set_All_GPIO_Quasi_Mode;
+                TIMER0_MODE0_ENABLE;                        //Timer 0 and Timer 1 mode configuration
+                TIMER1_MODE0_ENABLE;
+                  
+                clr_T0M;
+                clr_T1M;
+                  
+                TH0 = TH0_INIT;
+                TL0 = TL0_INIT;
+                TH1 = TH1_INIT;
+                TL1 = TL1_INIT;
+                  
+              //  set_ET0;                                    //enable Timer0 interrupt
+                set_ET1;                                    //enable Timer1 interrupt
+                set_EA;                                     //enable interrupts
+                
+                set_TR0;                                    //Timer0 run
+              //  set_TR1;                                    //Timer1 run
+              
+                while(1)
+                {
+                  TH0 = TH0_INIT;
+                  TL0 = TL0_INIT;
+                  set_TR0; 
+C51 COMPILER V9.52.0.0   MAIN                                                              08/31/2018 11:15:45 PAGE 4   
+
+                  while(!TF0);
+                  clr_TR0;
+                  P12 = ~P12; 
+                  TF0 = 0 ;
+              }
+              }
+              #endif
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    213    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      7    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

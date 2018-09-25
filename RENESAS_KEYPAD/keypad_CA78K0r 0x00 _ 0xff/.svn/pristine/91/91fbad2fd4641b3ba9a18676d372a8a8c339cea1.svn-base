@@ -1,0 +1,530 @@
+
+
+
+78K0R Linker V1.80                            Date: 2 Dec 2017 Page:   1
+
+Command:   -yD:\CS+\CACX\Device\RL78\Devicefile -_msgoff -dSource\StartU
+           p\memory.dr -oDefaultBuild\KeyPad_CA78K0R.lmf -gi000000000000
+           00000000h -go04h,1E00h,0 -gb0F7FFE0H -mi0 -s -pDefaultBuild\K
+           eyPad_CA78K0R.map DefaultBuild\cstart.rel DefaultBuild\main.r
+           el DefaultBuild\global.rel DefaultBuild\dataflash.rel Default
+           Build\keeloq.rel DefaultBuild\BuzTask.rel DefaultBuild\ClkSet
+           .rel DefaultBuild\KeyTask.rel DefaultBuild\Timer_Wdg.rel Defa
+           ultBuild\SendDataMake.rel DefaultBuild\LowPowerConsum.rel Def
+           aultBuild\InitalKey.rel -bSource\Driver\PFDL\librl78\pfdl.lib
+            -bcl0ram.lib -bcl0rm.lib -bcl0rmf.lib -iD:\CS+\CACX\CA78K0R\
+           V1.72\lib78k0r
+Para-file:
+Out-file:  DefaultBuild\KeyPad_CA78K0R.lmf
+Map-file:  DefaultBuild\KeyPad_CA78K0R.map
+Direc-file:Source\StartUp\memory.dr
+Directive: ;/***********************************************************
+           ***********************************************************
+           ;* DISCLAIMER
+           ;* This software is supplied by Renesas Electronics Corporati
+           on and is only 
+           ;* intended for use with Renesas products. No other uses are 
+           authorized. This 
+           ;* software is owned by Renesas Electronics Corporation and i
+           s protected under 
+           ;* all applicable laws, including copyright laws.
+           ;* THIS SOFTWARE IS PROVIDED "AS IS" AND RENESAS MAKES NO WAR
+           RANTIES REGARDING 
+           ;* THIS SOFTWARE, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCL
+           UDING BUT NOT 
+           ;* LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PA
+           RTICULAR PURPOSE 
+           ;* AND NON-INFRINGEMENT.  ALL SUCH WARRANTIES ARE EXPRESSLY D
+           ISCLAIMED.
+           ;* TO THE MAXIMUM EXTENT PERMITTED NOT PROHIBITED BY LAW, NEI
+           THER RENESAS 
+           ;* ELECTRONICS CORPORATION NOR ANY OF ITS AFFILIATED COMPANIE
+           S SHALL BE LIABLE 
+           ;* FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUEN
+           TIAL DAMAGES FOR 
+           ;* ANY REASON RELATED TO THIS SOFTWARE, EVEN IF RENESAS OR IT
+           S AFFILIATES HAVE 
+           ;* BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+           ;* Renesas reserves the right, without notice, to make change
+           s to this software 
+           ;* and to discontinue the availability of this software.  By 
+           using this software, 
+           ;* you agree to the additional terms and conditions found by 
+           accessing the 
+           ;* following link:
+           ;* http://www.renesas.com/disclaimer
+           ;*
+           ;* Copyright (C) 2010, 2011 Renesas Electronics Corporation. 
+           All rights reserved.
+           ;************************************************************
+           **********************************************************/
+           
+           ;/*
+           ;************************************************************
+           ***********************************************************
+           ;* File Name    : r_lk.dr
+           ;* Version      : CodeGenerator for RL78/G13 V1.03.01 [11 Oct
+            2011]
+           ;* Device(s)    : R5F100LE
+           ;* Tool-Chain   : CA78K0R
+           ;* Description  : This is the link file.
+           ;* Creation Date: 2012/07/06
+           ;************************************************************
+           ***********************************************************
+           ;*/
+           ; [Sample of Link Directive File]
+           ; ***********************************************************
+           **
+           ; Link Directive File is created by users when memory or segm
+           ent
+           ; location needs to be changed from the default as the follow
+           ing
+           ; cases, for instance:
+           ;    1. In case the stack area should be in fixed area
+           ;    2. In case the external memory should be used
+           ;
+           ; Please change the start address, the size of memory, 
+           ; and the name of memory or segment according to your system,
+           
+           ; and link this file with -D linker option if necessary.
+           ;
+           ;   MEMORY directive : Declares an address in installed memor
+           y.
+           ;                      Devides memory into two or more areas 
+           and
+           ;                      specifies a memory area
+           ;   MERGE directive  : Specifies location of a segment
+           ; ***********************************************************
+           **
+           
+           ; <Example on how to specify the stack area>
+           ;  Please specify the linker option -SSTK.
+           ;  The stack area should be in the internal RAM area.
+           ;
+           ;      START ADDRESS, STACK SIZE
+           ;memory STK : ( 0FB000H, 100H )
+           ; <Example of locating data in external memory>
+           ; The section name output by C compiler can be changed with
+           ; #pragma section function.
+           ;
+           ; If the name of ROMization-related section which has global
+           ; variables with initial values is changed, the modification 
+           of
+           ; C start-up routine will be required. 
+           ; Please refer the CC78K0R C Compiler Language User's Manual 
+           
+           ; Language Chap.11 in detail.
+           ;
+           ; ex. This is the example of renaming the @@DATAL segment.
+           ;   #pragma section @@DATAL EXTDATA
+           ;
+           ;   By the following directives, "EXTDATA" segment is located
+            in EXMEM area.
+           ;
+           ;        START ADDRESS, MEMORY SIZE
+           ;***********************************************************
+           ; Redefined RAM area
+           ;***********************************************************
+           ; ----------------------------------------------------------
+           ; Redefined default data segment RAM
+           ; ----------------------------------------------------------
+           MEMORY RAM : ( 0FFC00H, 01E0H )
+           
+           
+           ;memory STK : ( 0FFDE0H, 40H )
+           
+           ; ----------------------------------------------------------
+           ; Define new memory entry for saddr area
+           ; ----------------------------------------------------------
+           ;MEMORY RAM_SADDR : ( 0FFE20H, 01E0H )
+           MEMORY RAM_SADDR : ( 0FFE20H, 00C0H )
+           
+           
+           MEMORY ROM : (0000H, 1600H) 
+           MEMORY DFL_C : (01F00H, 20H) 
+           MEMORY KEY : (0F1000H,100H) 
+           ;merge @@CODEL: AT (300H)
+           
+
+
+*** Link information ***
+
+    39 output segment(s)
+ 11D8H byte(s) real data
+  1429 symbol(s) defined
+
+
+*** Memory map ***
+
+
+  SPACE=REGULAR
+
+  MEMORY=ROM
+  BASE ADDRESS=00000H   SIZE=01600H
+         OUTPUT   INPUT    INPUT      BASE      SIZE
+         SEGMENT  SEGMENT  MODULE     ADDRESS
+         @@VECT00                     00000H    00002H  CSEG AT
+                  @@VECT00 @cstart    00000H    00002H
+         @@CNST                       00002H    00000H  CSEG UNITP
+                  @@CNST   @cstart    00002H    00000H
+                  @@CNST   main       00002H    00000H
+                  @@CNST   global     00002H    00000H
+                  @@CNST   dataflash
+                                      00002H    00000H
+                  @@CNST   keeloq     00002H    00000H
+                  @@CNST   BuzTask    00002H    00000H
+                  @@CNST   ClkSet     00002H    00000H
+                  @@CNST   KeyTask    00002H    00000H
+                  @@CNST   Timer_Wdg
+                                      00002H    00000H
+                  @@CNST   SendDataMake
+                                      00002H    00000H
+                  @@CNST   LowPowerConsum
+                                      00002H    00000H
+                  @@CNST   InitalKey
+                                      00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  @cstart    00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  global     00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  dataflash
+                                      00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  keeloq     00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  BuzTask    00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  ClkSet     00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  KeyTask    00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  Timer_Wdg
+                                      00002H    00000H
+         @@CNSTL                      00002H    00000H  CSEG PAGE64KP
+                  @@CNSTL  LowPowerConsum
+                                      00002H    00000H
+         @@R_INIS                     00002H    00000H  CSEG UNIT64KP
+                  @@R_INIS @cstart    00002H    00000H
+                  @@R_INIS main       00002H    00000H
+                  @@R_INIS global     00002H    00000H
+                  @@R_INIS dataflash
+                                      00002H    00000H
+                  @@R_INIS keeloq     00002H    00000H
+                  @@R_INIS BuzTask    00002H    00000H
+                  @@R_INIS ClkSet     00002H    00000H
+                  @@R_INIS KeyTask    00002H    00000H
+                  @@R_INIS Timer_Wdg
+                                      00002H    00000H
+                  @@R_INIS SendDataMake
+                                      00002H    00000H
+                  @@R_INIS LowPowerConsum
+                                      00002H    00000H
+                  @@R_INIS InitalKey
+                                      00002H    00000H
+                  @@R_INIS @rom       00002H    00000H
+         @@CALT                       00002H    00000H  CSEG
+                  @@CALT   @cstart    00002H    00000H
+                  @@CALT   main       00002H    00000H
+                  @@CALT   global     00002H    00000H
+                  @@CALT   dataflash
+                                      00002H    00000H
+                  @@CALT   keeloq     00002H    00000H
+                  @@CALT   BuzTask    00002H    00000H
+                  @@CALT   ClkSet     00002H    00000H
+                  @@CALT   KeyTask    00002H    00000H
+                  @@CALT   Timer_Wdg
+                                      00002H    00000H
+                  @@CALT   SendDataMake
+                                      00002H    00000H
+                  @@CALT   LowPowerConsum
+                                      00002H    00000H
+                  @@CALT   InitalKey
+                                      00002H    00000H
+         @@RLINIT                     00002H    00000H  CSEG UNIT64KP
+                  @@RLINIT main       00002H    00000H
+                  @@RLINIT global     00002H    00000H
+                  @@RLINIT dataflash
+                                      00002H    00000H
+                  @@RLINIT keeloq     00002H    00000H
+                  @@RLINIT BuzTask    00002H    00000H
+                  @@RLINIT ClkSet     00002H    00000H
+                  @@RLINIT KeyTask    00002H    00000H
+                  @@RLINIT Timer_Wdg
+                                      00002H    00000H
+                  @@RLINIT SendDataMake
+                                      00002H    00000H
+                  @@RLINIT LowPowerConsum
+                                      00002H    00000H
+                  @@RLINIT InitalKey
+                                      00002H    00000H
+                  @@RLINIT @rom       00002H    00000H
+         ??NMIROM                     00002H    00002H  CSEG
+         @@CNSTL                      00004H    00018H  CSEG PAGE64KP
+                  @@CNSTL  main       00004H    00018H
+* gap *                               0001CH    00004H
+         @@VECT20                     00020H    00002H  CSEG AT
+                  @@VECT20 Timer_Wdg
+                                      00020H    00002H
+* gap *                               00022H    00002H
+         @@VECT24                     00024H    00002H  CSEG AT
+                  @@VECT24 Timer_Wdg
+                                      00024H    00002H
+         @@R_INIT                     00026H    00028H  CSEG UNIT64KP
+                  @@R_INIT @cstart    00026H    00000H
+                  @@R_INIT main       00026H    00000H
+                  @@R_INIT global     00026H    00000H
+                  @@R_INIT dataflash
+                                      00026H    00000H
+                  @@R_INIT keeloq     00026H    00028H
+                  @@R_INIT BuzTask    0004EH    00000H
+                  @@R_INIT ClkSet     0004EH    00000H
+                  @@R_INIT KeyTask    0004EH    00000H
+                  @@R_INIT Timer_Wdg
+                                      0004EH    00000H
+                  @@R_INIT SendDataMake
+                                      0004EH    00000H
+                  @@R_INIT LowPowerConsum
+                                      0004EH    00000H
+                  @@R_INIT InitalKey
+                                      0004EH    00000H
+                  @@R_INIT @rom       0004EH    00000H
+* gap *                               0004EH    00072H
+         ?CSEGOB0                     000C0H    00004H  CSEG OPT_BYTE
+         @@CODE                       000C4H    00000H  CSEG BASE
+                  @@CODE   main       000C4H    00000H
+                  @@CODE   global     000C4H    00000H
+                  @@CODE   dataflash
+                                      000C4H    00000H
+                  @@CODE   keeloq     000C4H    00000H
+                  @@CODE   BuzTask    000C4H    00000H
+                  @@CODE   ClkSet     000C4H    00000H
+                  @@CODE   KeyTask    000C4H    00000H
+                  @@CODE   Timer_Wdg
+                                      000C4H    00000H
+                  @@CODE   SendDataMake
+                                      000C4H    00000H
+                  @@CODE   LowPowerConsum
+                                      000C4H    00000H
+                  @@CODE   InitalKey
+                                      000C4H    00000H
+         ?CSEGSI                      000C4H    0000AH  CSEG
+         ?OCDSTAD                     000CEH    0000AH  CSEG
+         @@LCODE                      000D8H    000FBH  CSEG BASE
+                  @@LCODE  @cstart    000D8H    00071H
+                  @@LCODE  @divuw     00149H    00034H
+                  @@LCODE  @llsh      0017DH    0001BH
+                  @@LCODE  @lband     00198H    00014H
+                  @@LCODE  @lbor      001ACH    00014H
+                  @@LCODE  @LND0      001C0H    0000AH
+                  @@LCODE  @LN0D      001CAH    00009H
+         @@BASE                       001D3H    000D0H  CSEG BASE
+                  @@BASE   main       001D3H    00000H
+                  @@BASE   global     001D3H    00000H
+                  @@BASE   dataflash
+                                      001D3H    00000H
+                  @@BASE   keeloq     001D3H    00000H
+                  @@BASE   BuzTask    001D3H    00000H
+                  @@BASE   ClkSet     001D3H    00000H
+                  @@BASE   KeyTask    001D3H    00000H
+                  @@BASE   Timer_Wdg
+                                      001D3H    000D0H
+                  @@BASE   SendDataMake
+                                      002A3H    00000H
+                  @@BASE   LowPowerConsum
+                                      002A3H    00000H
+                  @@BASE   InitalKey
+                                      002A3H    00000H
+         @@CODEL                      002A3H    00E9DH  CSEG
+                  @@CODEL  main       002A3H    00462H
+                  @@CODEL  global     00705H    00000H
+                  @@CODEL  dataflash
+                                      00705H    00168H
+                  @@CODEL  keeloq     0086DH    00312H
+                  @@CODEL  BuzTask    00B7FH    00064H
+                  @@CODEL  ClkSet     00BE3H    0009BH
+                  @@CODEL  KeyTask    00C7EH    00210H
+                  @@CODEL  Timer_Wdg
+                                      00E8EH    00171H
+                  @@CODEL  SendDataMake
+                                      00FFFH    0012AH
+                  @@CODEL  LowPowerConsum
+                                      01129H    00017H
+                  @@CODEL  InitalKey
+                                      01140H    00000H
+         PFDL_COD                     01140H    00097H  CSEG UNIT64KP
+                  PFDL_COD pfdl       01140H    00097H
+         @@LCODEL                     011D7H    00061H  CSEG
+                  @@LCODEL @hdwinit   011D7H    00001H
+                  @@LCODEL @stkinit   011D8H    00044H
+                  @@LCODEL exit       0121CH    0001CH
+* gap *                               01238H    003C8H
+
+  MEMORY=DFL_C
+  BASE ADDRESS=01F00H   SIZE=00020H
+         OUTPUT   INPUT    INPUT      BASE      SIZE
+         SEGMENT  SEGMENT  MODULE     ADDRESS
+         DFL_C                        01F00H    00004H  CSEG AT
+                  DFL_C    SendDataMake
+                                      01F00H    00004H
+* gap *                               01F04H    0001CH
+
+  MEMORY=KEY
+  BASE ADDRESS=F1000H   SIZE=00100H
+         OUTPUT   INPUT    INPUT      BASE      SIZE
+         SEGMENT  SEGMENT  MODULE     ADDRESS
+         KEY                          F1000H    00014H  CSEG AT
+                  KEY      InitalKey
+                                      F1000H    00014H
+* gap *                               F1014H    000ECH
+
+  MEMORY=RAM
+  BASE ADDRESS=FFC00H   SIZE=001E0H
+         OUTPUT   INPUT    INPUT      BASE      SIZE
+         SEGMENT  SEGMENT  MODULE     ADDRESS
+         @@DATA                       FFC00H    0012CH  DSEG BASEP
+                  @@DATA   @cstart    FFC00H    000B8H
+                  @@DATA   main       FFCB8H    00008H
+                  @@DATA   global     FFCC0H    0002EH
+                  @@DATA   dataflash
+                                      FFCEEH    00000H
+                  @@DATA   keeloq     FFCEEH    00000H
+                  @@DATA   BuzTask    FFCEEH    00006H
+                  @@DATA   ClkSet     FFCF4H    00002H
+                  @@DATA   KeyTask    FFCF6H    00030H
+                  @@DATA   Timer_Wdg
+                                      FFD26H    00006H
+                  @@DATA   SendDataMake
+                                      FFD2CH    00000H
+                  @@DATA   LowPowerConsum
+                                      FFD2CH    00000H
+                  @@DATA   InitalKey
+                                      FFD2CH    00000H
+                  @@DATA   @rom       FFD2CH    00000H
+         @@INIT                       FFD2CH    00028H  DSEG BASEP
+                  @@INIT   @cstart    FFD2CH    00000H
+                  @@INIT   main       FFD2CH    00000H
+                  @@INIT   global     FFD2CH    00000H
+                  @@INIT   dataflash
+                                      FFD2CH    00000H
+                  @@INIT   keeloq     FFD2CH    00028H
+                  @@INIT   BuzTask    FFD54H    00000H
+                  @@INIT   ClkSet     FFD54H    00000H
+                  @@INIT   KeyTask    FFD54H    00000H
+                  @@INIT   Timer_Wdg
+                                      FFD54H    00000H
+                  @@INIT   SendDataMake
+                                      FFD54H    00000H
+                  @@INIT   LowPowerConsum
+                                      FFD54H    00000H
+                  @@INIT   InitalKey
+                                      FFD54H    00000H
+                  @@INIT   @rom       FFD54H    00000H
+         @@INIS                       FFD54H    00000H  DSEG UNITP
+                  @@INIS   @cstart    FFD54H    00000H
+                  @@INIS   main       FFD54H    00000H
+                  @@INIS   global     FFD54H    00000H
+                  @@INIS   dataflash
+                                      FFD54H    00000H
+                  @@INIS   keeloq     FFD54H    00000H
+                  @@INIS   BuzTask    FFD54H    00000H
+                  @@INIS   ClkSet     FFD54H    00000H
+                  @@INIS   KeyTask    FFD54H    00000H
+                  @@INIS   Timer_Wdg
+                                      FFD54H    00000H
+                  @@INIS   SendDataMake
+                                      FFD54H    00000H
+                  @@INIS   LowPowerConsum
+                                      FFD54H    00000H
+                  @@INIS   InitalKey
+                                      FFD54H    00000H
+                  @@INIS   @rom       FFD54H    00000H
+         @@DATS                       FFD54H    00000H  DSEG UNITP
+                  @@DATS   @cstart    FFD54H    00000H
+                  @@DATS   main       FFD54H    00000H
+                  @@DATS   global     FFD54H    00000H
+                  @@DATS   dataflash
+                                      FFD54H    00000H
+                  @@DATS   keeloq     FFD54H    00000H
+                  @@DATS   BuzTask    FFD54H    00000H
+                  @@DATS   ClkSet     FFD54H    00000H
+                  @@DATS   KeyTask    FFD54H    00000H
+                  @@DATS   Timer_Wdg
+                                      FFD54H    00000H
+                  @@DATS   SendDataMake
+                                      FFD54H    00000H
+                  @@DATS   LowPowerConsum
+                                      FFD54H    00000H
+                  @@DATS   InitalKey
+                                      FFD54H    00000H
+                  @@DATS   @rom       FFD54H    00000H
+         @@INITL                      FFD54H    00000H  DSEG UNIT64KP
+                  @@INITL  main       FFD54H    00000H
+                  @@INITL  global     FFD54H    00000H
+                  @@INITL  dataflash
+                                      FFD54H    00000H
+                  @@INITL  keeloq     FFD54H    00000H
+                  @@INITL  BuzTask    FFD54H    00000H
+                  @@INITL  ClkSet     FFD54H    00000H
+                  @@INITL  KeyTask    FFD54H    00000H
+                  @@INITL  Timer_Wdg
+                                      FFD54H    00000H
+                  @@INITL  SendDataMake
+                                      FFD54H    00000H
+                  @@INITL  LowPowerConsum
+                                      FFD54H    00000H
+                  @@INITL  InitalKey
+                                      FFD54H    00000H
+                  @@INITL  @rom       FFD54H    00000H
+         @@DATAL                      FFD54H    00000H  DSEG UNIT64KP
+                  @@DATAL  main       FFD54H    00000H
+                  @@DATAL  global     FFD54H    00000H
+                  @@DATAL  dataflash
+                                      FFD54H    00000H
+                  @@DATAL  keeloq     FFD54H    00000H
+                  @@DATAL  BuzTask    FFD54H    00000H
+                  @@DATAL  ClkSet     FFD54H    00000H
+                  @@DATAL  KeyTask    FFD54H    00000H
+                  @@DATAL  Timer_Wdg
+                                      FFD54H    00000H
+                  @@DATAL  SendDataMake
+                                      FFD54H    00000H
+                  @@DATAL  LowPowerConsum
+                                      FFD54H    00000H
+                  @@DATAL  InitalKey
+                                      FFD54H    00000H
+                  @@DATAL  @rom       FFD54H    00000H
+         @@BITS                       FFD54H    00000H  BSEG
+                  @@BITS   @cstart    FFD54H.0  00000H.0
+                  @@BITS   main       FFD54H.0  00000H.0
+                  @@BITS   global     FFD54H.0  00000H.0
+                  @@BITS   dataflash
+                                      FFD54H.0  00000H.0
+                  @@BITS   keeloq     FFD54H.0  00000H.0
+                  @@BITS   BuzTask    FFD54H.0  00000H.0
+                  @@BITS   ClkSet     FFD54H.0  00000H.0
+                  @@BITS   KeyTask    FFD54H.0  00000H.0
+                  @@BITS   Timer_Wdg
+                                      FFD54H.0  00000H.0
+                  @@BITS   SendDataMake
+                                      FFD54H.0  00000H.0
+                  @@BITS   LowPowerConsum
+                                      FFD54H.0  00000H.0
+                  @@BITS   InitalKey
+                                      FFD54H.0  00000H.0
+* gap *                               FFD54H    0008CH
+
+  MEMORY=RAM_SADDR
+  BASE ADDRESS=FFE20H   SIZE=000C0H
+         OUTPUT   INPUT    INPUT      BASE      SIZE
+         SEGMENT  SEGMENT  MODULE     ADDRESS
+* gap *                               FFE20H    000B4H
+         @@SEGREG                     FFED4H    00004H  DSEG AT
+                  @@SEGREG @SEGREG    FFED4H    00004H
+         @@RTARG0                     FFED8H    00008H  DSEG AT
+                  @@RTARG0 @RTARG0    FFED8H    00008H
+
+
+ Target chip : R5F10268
+ Device file : V1.12
+

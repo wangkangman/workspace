@@ -1,0 +1,454 @@
+Version 3.2 HI-TECH Software Intermediate Code
+"13 source/keeloq.h
+[v _getBit `(uc ~T0 @X0 0 ef2`*uc`us ]
+"14
+[v _RRC `(*uc ~T0 @X0 0 ef3`*uc`uc`uc ]
+[; ;type.h: 13: typedef unsigned char u8;
+[; ;type.h: 14: typedef unsigned short u16;
+[; ;type.h: 16: typedef unsigned char U08ET;
+[; ;type.h: 17: typedef unsigned short U16ET;
+[; ;type.h: 18: typedef void VODET;
+[; ;keeloq.h: 11: u8* ENcrypt(u8 *source, u8* _key);
+[; ;keeloq.h: 12: u8* DEcrypt(u8 *source, u8* _key);
+[; ;keeloq.h: 13: u8 getBit( u8 *source, u16 n);
+[; ;keeloq.h: 14: u8* RRC(u8 *source, u8 c, u8 n);
+[; ;keeloq.h: 15: u8* RLC(u8 *source, u8 c, u8 n);
+[; ;keeloq.h: 16: u8* _keeloq_encrypt(u8 *source, u8 EncryptMode);
+[; ;keeloq.h: 17: u8* LRN_MKEY(u8 *source, u8 *new_key);
+[; ;keeloq.h: 18: u8* _keeloq_decrypt(u8 *source);
+[v F35 `Cuc ~T0 @X0 -> 2 `i t ]
+[v F34 `F35 ~T0 @X0 -> 2 `i t ]
+[v F33 `F34 ~T0 @X0 -> 2 `i t ]
+[v F32 `F33 ~T0 @X0 -> 2 `i t ]
+"8 source/keeloq.c
+[v _NLF `F32 ~T0 @X0 -> 2 `i e ]
+[i _NLF
+:U ..
+:U ..
+:U ..
+:U ..
+:U ..
+-> -> 0 `i `uc
+-> -> 1 `i `uc
+..
+:U ..
+-> -> 1 `i `uc
+-> -> 1 `i `uc
+..
+..
+:U ..
+:U ..
+-> -> 0 `i `uc
+-> -> 1 `i `uc
+..
+:U ..
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+..
+..
+..
+:U ..
+:U ..
+:U ..
+"9
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+..
+:U ..
+-> -> 1 `i `uc
+-> -> 0 `i `uc
+..
+..
+:U ..
+:U ..
+-> -> 1 `i `uc
+-> -> 1 `i `uc
+..
+:U ..
+-> -> 1 `i `uc
+-> -> 0 `i `uc
+..
+..
+..
+..
+:U ..
+:U ..
+:U ..
+:U ..
+"10
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+..
+:U ..
+-> -> 1 `i `uc
+-> -> 1 `i `uc
+..
+..
+:U ..
+:U ..
+-> -> 1 `i `uc
+-> -> 0 `i `uc
+..
+:U ..
+-> -> 1 `i `uc
+-> -> 0 `i `uc
+..
+..
+..
+:U ..
+:U ..
+:U ..
+"11
+-> -> 0 `i `uc
+-> -> 1 `i `uc
+..
+:U ..
+-> -> 0 `i `uc
+-> -> 1 `i `uc
+..
+..
+:U ..
+:U ..
+-> -> 1 `i `uc
+-> -> 1 `i `uc
+..
+:U ..
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+..
+..
+..
+..
+..
+]
+[; ;keeloq.c: 8: const u8 NLF[2][2][2][2][2]={0,1,1,1,0,1,0,0,
+[; ;keeloq.c: 9: 0,0,1,0,1,1,1,0,
+[; ;keeloq.c: 10: 0,0,1,1,1,0,1,0,
+[; ;keeloq.c: 11: 0,1,0,1,1,1,0,0};
+"53
+[v _ENcrypt `(*uc ~T0 @X0 1 ef2`*uc`*uc ]
+"54
+{
+[; ;keeloq.c: 53: u8* ENcrypt(u8 *source, u8* _key)
+[; ;keeloq.c: 54: {
+[e :U _ENcrypt ]
+"53
+[v _source `*uc ~T0 @X0 1 r1 ]
+[v __key `*uc ~T0 @X0 1 r2 ]
+"54
+[f ]
+"55
+[v _i `us ~T0 @X0 1 a ]
+"56
+[v _c `uc ~T0 @X0 1 a ]
+[v _nlf `uc ~T0 @X0 1 a ]
+[v _y16 `uc ~T0 @X0 1 a ]
+[v _y0 `uc ~T0 @X0 1 a ]
+[v _k `uc ~T0 @X0 1 a ]
+[v _result `uc ~T0 @X0 1 a ]
+[; ;keeloq.c: 55: u16 i;
+[; ;keeloq.c: 56: u8 c, nlf, y16, y0, k, result;
+[; ;keeloq.c: 57: c = 0;
+"57
+[e = _c -> -> 0 `i `uc ]
+[; ;keeloq.c: 58: for (i = 0; i < 528; i++)
+"58
+{
+[e = _i -> -> 0 `i `us ]
+[e $ < -> _i `ui -> -> 528 `i `ui 2  ]
+[e $U 3  ]
+"59
+[e :U 2 ]
+[; ;keeloq.c: 59: {
+{
+[; ;keeloq.c: 60: nlf = NLF[getBit(source, 31)][getBit(source, 26)][getBit(source, 20)][getBit(source, 9)][getBit(source, 1)];
+"60
+[e = _nlf *U + &U *U + &U *U + &U *U + &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 31 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 26 `i `us `ux -> * * * -> # *U &U *U &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 31 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 20 `i `us `ux -> * * -> # *U &U *U &U *U + &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 31 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 26 `i `us `ux -> * * * -> # *U &U *U &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 31 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 9 `i `us `ux -> * -> # *U &U *U &U *U + &U *U + &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 31 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 26 `i `us `ux -> * * * -> # *U &U *U &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 31 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 20 `i `us `ux -> * * -> # *U &U *U &U *U + &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 31 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 26 `i `us `ux -> * * * -> # *U &U *U &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 31 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 1 `i `us `ux -> -> # *U &U *U + &U *U + &U *U + &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 31 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 26 `i `us `ux -> * * * -> # *U &U *U &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 31 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 20 `i `us `ux -> * * -> # *U &U *U &U *U + &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 31 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 26 `i `us `ux -> * * * -> # *U &U *U &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 31 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 9 `i `us `ux -> * -> # *U &U *U &U *U + &U *U + &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 31 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 26 `i `us `ux -> * * * -> # *U &U *U &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 31 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 20 `i `us `ux -> * * -> # *U &U *U &U *U + &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 31 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 26 `i `us `ux -> * * * -> # *U &U *U &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 31 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui `ux `ui `ux ]
+[; ;keeloq.c: 61: y16 = getBit(source, 16);
+"61
+[e = _y16 ( _getBit (2 , _source -> -> 16 `i `us ]
+[; ;keeloq.c: 62: y0 = getBit(source, 0);
+"62
+[e = _y0 ( _getBit (2 , _source -> -> 0 `i `us ]
+[; ;keeloq.c: 63: k = getBit(_key, i % 64);
+"63
+[e = _k ( _getBit (2 , __key -> % -> _i `ui -> -> 64 `i `ui `us ]
+[; ;keeloq.c: 64: result = nlf^y16^y0^k;
+"64
+[e = _result -> ^ ^ ^ -> _nlf `i -> _y16 `i -> _y0 `i -> _k `i `uc ]
+[; ;keeloq.c: 65: c = result ? 1 : 0;
+"65
+[e = _c -> ? != -> _result `i -> -> -> 0 `i `uc `i : -> 1 `i -> 0 `i `uc ]
+[; ;keeloq.c: 66: source = RRC(source, c, 4);
+"66
+[e = _source ( _RRC (3 , , _source _c -> -> 4 `i `uc ]
+"67
+}
+"58
+[e ++ _i -> -> 1 `i `us ]
+[e $ < -> _i `ui -> -> 528 `i `ui 2  ]
+[e :U 3 ]
+"67
+}
+[; ;keeloq.c: 67: }
+[; ;keeloq.c: 68: return source;
+"68
+[e ) _source ]
+[e $UE 1  ]
+[; ;keeloq.c: 69: }
+"69
+[e :UE 1 ]
+}
+"79
+[v _DEcrypt `(*uc ~T0 @X0 1 ef2`*uc`*uc ]
+"80
+{
+[; ;keeloq.c: 79: u8 * DEcrypt(u8 *source, u8* _key)
+[; ;keeloq.c: 80: {
+[e :U _DEcrypt ]
+"79
+[v _source `*uc ~T0 @X0 1 r1 ]
+[v __key `*uc ~T0 @X0 1 r2 ]
+"80
+[f ]
+"81
+[v _bitk `uc ~T0 @X0 -> 4 `i a ]
+[v _res `uc ~T0 @X0 1 a ]
+"82
+[v _index `us ~T0 @X0 1 a ]
+[; ;keeloq.c: 81: U08ET bitk[4], res;
+[; ;keeloq.c: 82: U16ET index;
+[; ;keeloq.c: 83: for(index=0; index<528; index++) {
+"83
+{
+[e = _index -> -> 0 `i `us ]
+[e $ < -> _index `ui -> -> 528 `i `ui 6  ]
+[e $U 7  ]
+[e :U 6 ]
+{
+[; ;keeloq.c: 84: bitk[0] = NLF[getBit(source,30)][getBit(source,25)][getBit(source,19)][getBit(source, 8)][getBit(source,0)];
+"84
+[e = *U + &U _bitk * -> -> -> 0 `i `ui `ux -> -> # *U &U _bitk `ui `ux *U + &U *U + &U *U + &U *U + &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 30 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 25 `i `us `ux -> * * * -> # *U &U *U &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 30 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 19 `i `us `ux -> * * -> # *U &U *U &U *U + &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 30 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 25 `i `us `ux -> * * * -> # *U &U *U &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 30 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 8 `i `us `ux -> * -> # *U &U *U &U *U + &U *U + &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 30 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 25 `i `us `ux -> * * * -> # *U &U *U &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 30 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 19 `i `us `ux -> * * -> # *U &U *U &U *U + &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 30 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 25 `i `us `ux -> * * * -> # *U &U *U &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 30 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 0 `i `us `ux -> -> # *U &U *U + &U *U + &U *U + &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 30 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 25 `i `us `ux -> * * * -> # *U &U *U &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 30 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 19 `i `us `ux -> * * -> # *U &U *U &U *U + &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 30 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 25 `i `us `ux -> * * * -> # *U &U *U &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 30 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 8 `i `us `ux -> * -> # *U &U *U &U *U + &U *U + &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 30 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 25 `i `us `ux -> * * * -> # *U &U *U &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 30 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 19 `i `us `ux -> * * -> # *U &U *U &U *U + &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 30 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux * -> ( _getBit (2 , _source -> -> 25 `i `us `ux -> * * * -> # *U &U *U &U *U + &U _NLF * -> ( _getBit (2 , _source -> -> 30 `i `us `ux -> * * * * -> # *U &U *U &U _NLF `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui -> -> 2 `i `ui `ux `ui -> -> 2 `i `ui `ux `ui `ux ]
+[; ;keeloq.c: 85: bitk[1] = getBit(source, 15);
+"85
+[e = *U + &U _bitk * -> -> -> 1 `i `ui `ux -> -> # *U &U _bitk `ui `ux ( _getBit (2 , _source -> -> 15 `i `us ]
+[; ;keeloq.c: 86: bitk[2] = getBit(source, 31);
+"86
+[e = *U + &U _bitk * -> -> -> 2 `i `ui `ux -> -> # *U &U _bitk `ui `ux ( _getBit (2 , _source -> -> 31 `i `us ]
+[; ;keeloq.c: 87: bitk[3] = getBit(_key, (527-index)%64);
+"87
+[e = *U + &U _bitk * -> -> -> 3 `i `ui `ux -> -> # *U &U _bitk `ui `ux ( _getBit (2 , __key -> % - -> -> 527 `i `ui -> _index `ui -> -> 64 `i `ui `us ]
+[; ;keeloq.c: 88: res = bitk[0]^bitk[1]^bitk[2]^bitk[3];
+"88
+[e = _res -> ^ ^ ^ -> *U + &U _bitk * -> -> -> 0 `i `ui `ux -> -> # *U &U _bitk `ui `ux `i -> *U + &U _bitk * -> -> -> 1 `i `ui `ux -> -> # *U &U _bitk `ui `ux `i -> *U + &U _bitk * -> -> -> 2 `i `ui `ux -> -> # *U &U _bitk `ui `ux `i -> *U + &U _bitk * -> -> -> 3 `i `ui `ux -> -> # *U &U _bitk `ui `ux `i `uc ]
+[; ;keeloq.c: 89: source[3] = (source[3]<<1) | (source[2]>>7);
+"89
+[e = *U + _source * -> -> 3 `i `x -> -> # *U _source `i `x -> | << -> *U + _source * -> -> 3 `i `x -> -> # *U _source `i `x `i -> 1 `i >> -> *U + _source * -> -> 2 `i `x -> -> # *U _source `i `x `i -> 7 `i `uc ]
+[; ;keeloq.c: 90: source[2] = (source[2]<<1) | (source[1]>>7);
+"90
+[e = *U + _source * -> -> 2 `i `x -> -> # *U _source `i `x -> | << -> *U + _source * -> -> 2 `i `x -> -> # *U _source `i `x `i -> 1 `i >> -> *U + _source * -> -> 1 `i `x -> -> # *U _source `i `x `i -> 7 `i `uc ]
+[; ;keeloq.c: 91: source[1] = (source[1]<<1) | (source[0]>>7);
+"91
+[e = *U + _source * -> -> 1 `i `x -> -> # *U _source `i `x -> | << -> *U + _source * -> -> 1 `i `x -> -> # *U _source `i `x `i -> 1 `i >> -> *U + _source * -> -> 0 `i `x -> -> # *U _source `i `x `i -> 7 `i `uc ]
+[; ;keeloq.c: 92: source[0] = (source[0]<<1) | (res);
+"92
+[e = *U + _source * -> -> 0 `i `x -> -> # *U _source `i `x -> | << -> *U + _source * -> -> 0 `i `x -> -> # *U _source `i `x `i -> 1 `i -> _res `i `uc ]
+"93
+}
+"83
+[e ++ _index -> -> 1 `i `us ]
+[e $ < -> _index `ui -> -> 528 `i `ui 6  ]
+[e :U 7 ]
+"93
+}
+[; ;keeloq.c: 93: }
+[; ;keeloq.c: 94: return source;
+"94
+[e ) _source ]
+[e $UE 5  ]
+[; ;keeloq.c: 95: }
+"95
+[e :UE 5 ]
+}
+"105
+[v _getBit `(uc ~T0 @X0 1 ef2`*uc`us ]
+"106
+{
+[; ;keeloq.c: 105: u8 getBit( u8* source, u16 n)
+[; ;keeloq.c: 106: {
+[e :U _getBit ]
+"105
+[v _source `*uc ~T0 @X0 1 r1 ]
+[v _n `us ~T0 @X0 1 r2 ]
+"106
+[f ]
+"107
+[v _byidx `uc ~T0 @X0 1 a ]
+[v _btidx `uc ~T0 @X0 1 a ]
+[; ;keeloq.c: 107: U08ET byidx, btidx;
+[; ;keeloq.c: 109: byidx = n/8;
+"109
+[e = _byidx -> / -> _n `ui -> -> 8 `i `ui `uc ]
+[; ;keeloq.c: 110: btidx = n%8;
+"110
+[e = _btidx -> % -> _n `ui -> -> 8 `i `ui `uc ]
+[; ;keeloq.c: 112: if( 0 == (source[byidx] & (1<<btidx)) ) {
+"112
+[e $ ! == -> 0 `i & -> *U + _source * -> _byidx `ux -> -> # *U _source `ui `ux `i << -> 1 `i _btidx 10  ]
+{
+[; ;keeloq.c: 113: return 0;
+"113
+[e ) -> -> 0 `i `uc ]
+[e $UE 9  ]
+"114
+}
+[; ;keeloq.c: 114: }
+[e $U 11  ]
+"115
+[e :U 10 ]
+[; ;keeloq.c: 115: else{
+{
+[; ;keeloq.c: 116: return 1;
+"116
+[e ) -> -> 1 `i `uc ]
+[e $UE 9  ]
+"117
+}
+[e :U 11 ]
+[; ;keeloq.c: 117: }
+[; ;keeloq.c: 118: }
+"118
+[e :UE 9 ]
+}
+"129
+[v _RRC `(*uc ~T0 @X0 1 ef3`*uc`uc`uc ]
+"130
+{
+[; ;keeloq.c: 129: u8 * RRC(u8 *source, u8 c, u8 n)
+[; ;keeloq.c: 130: {
+[e :U _RRC ]
+"129
+[v _source `*uc ~T0 @X0 1 r1 ]
+[v _c `uc ~T0 @X0 1 r2 ]
+[v _n `uc ~T0 @X0 1 r3 ]
+"130
+[f ]
+"131
+[v _temp `uc ~T0 @X0 1 a ]
+[; ;keeloq.c: 131: u8 temp;
+[; ;keeloq.c: 132: for (; n>0; n--) {
+"132
+{
+[e $ > -> _n `i -> 0 `i 13  ]
+[e $U 14  ]
+[e :U 13 ]
+{
+[; ;keeloq.c: 133: temp = source[n - 1];
+"133
+[e = _temp *U + _source * -> - -> _n `i -> 1 `i `x -> -> # *U _source `i `x ]
+[; ;keeloq.c: 134: if (c) {
+"134
+[e $ ! != -> _c `i -> -> -> 0 `i `uc `i 16  ]
+{
+[; ;keeloq.c: 135: source[n - 1] = (source[n - 1] >> 1) | 0x80;
+"135
+[e = *U + _source * -> - -> _n `i -> 1 `i `x -> -> # *U _source `i `x -> | >> -> *U + _source * -> - -> _n `i -> 1 `i `x -> -> # *U _source `i `x `i -> 1 `i -> 128 `i `uc ]
+"136
+}
+[; ;keeloq.c: 136: }
+[e $U 17  ]
+"137
+[e :U 16 ]
+[; ;keeloq.c: 137: else {
+{
+[; ;keeloq.c: 138: source[n - 1] = (source[n - 1] >> 1) & 0x7f;
+"138
+[e = *U + _source * -> - -> _n `i -> 1 `i `x -> -> # *U _source `i `x -> & >> -> *U + _source * -> - -> _n `i -> 1 `i `x -> -> # *U _source `i `x `i -> 1 `i -> 127 `i `uc ]
+"139
+}
+[e :U 17 ]
+[; ;keeloq.c: 139: }
+[; ;keeloq.c: 140: c = (temp & 0x01) ? 1 : 0;
+"140
+[e = _c -> ? != & -> _temp `i -> 1 `i -> 0 `i : -> 1 `i -> 0 `i `uc ]
+"141
+}
+"132
+[e -- _n -> -> 1 `i `uc ]
+[e $ > -> _n `i -> 0 `i 13  ]
+[e :U 14 ]
+"141
+}
+[; ;keeloq.c: 141: }
+[; ;keeloq.c: 142: return source;
+"142
+[e ) _source ]
+[e $UE 12  ]
+[; ;keeloq.c: 143: }
+"143
+[e :UE 12 ]
+}
+"154
+[v _RLC `(*uc ~T0 @X0 1 ef3`*uc`uc`uc ]
+{
+[; ;keeloq.c: 154: u8 * RLC(u8 *source, u8 c, u8 n) {
+[e :U _RLC ]
+[v _source `*uc ~T0 @X0 1 r1 ]
+[v _c `uc ~T0 @X0 1 r2 ]
+[v _n `uc ~T0 @X0 1 r3 ]
+[f ]
+"155
+[v _temp `uc ~T0 @X0 1 a ]
+[v _i `uc ~T0 @X0 1 a ]
+[; ;keeloq.c: 155: u8 temp, i;
+[; ;keeloq.c: 156: for (i = 0; i<n; i++) {
+"156
+{
+[e = _i -> -> 0 `i `uc ]
+[e $U 22  ]
+[e :U 19 ]
+{
+[; ;keeloq.c: 157: temp = source[i];
+"157
+[e = _temp *U + _source * -> _i `ux -> -> # *U _source `ui `ux ]
+[; ;keeloq.c: 158: if (c != 0) {
+"158
+[e $ ! != -> _c `i -> 0 `i 23  ]
+{
+[; ;keeloq.c: 159: source[i] = (source[i] << 1) | 0x01;
+"159
+[e = *U + _source * -> _i `ux -> -> # *U _source `ui `ux -> | << -> *U + _source * -> _i `ux -> -> # *U _source `ui `ux `i -> 1 `i -> 1 `i `uc ]
+"160
+}
+[; ;keeloq.c: 160: } else {
+[e $U 24  ]
+[e :U 23 ]
+{
+[; ;keeloq.c: 161: source[i] = (source[i] << 1) & 0xfe;
+"161
+[e = *U + _source * -> _i `ux -> -> # *U _source `ui `ux -> & << -> *U + _source * -> _i `ux -> -> # *U _source `ui `ux `i -> 1 `i -> 254 `i `uc ]
+"162
+}
+[e :U 24 ]
+[; ;keeloq.c: 162: }
+[; ;keeloq.c: 163: c = (temp & 0x80) ? 1 : 0;
+"163
+[e = _c -> ? != & -> _temp `i -> 128 `i -> 0 `i : -> 1 `i -> 0 `i `uc ]
+"164
+}
+"156
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 22 ]
+[e $ < -> _i `i -> _n `i 19  ]
+[e :U 20 ]
+"164
+}
+[; ;keeloq.c: 164: }
+[; ;keeloq.c: 165: return source;
+"165
+[e ) _source ]
+[e $UE 18  ]
+[; ;keeloq.c: 166: }
+"166
+[e :UE 18 ]
+}

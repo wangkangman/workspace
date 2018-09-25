@@ -1,0 +1,31 @@
+#	LINK COMMAND FILE FOR TEST PROGRAM
+#	Copyright (c) 1998 by COSMIC Software
+#
++seg .text -b 0xf000 -n .text		# program start address
++seg .const -a .text			# constants follow code
++seg .data -b 0x80 -m 0x80		# data start address
++seg .ubsct -n iram			# uninitialized zero page
+#
+# define the .share segment when using compact or memory models only
+#
+#+seg .share -a iram -is		# shared segment
+
+# Put you startup file here
+"D:\Program Files (x86)\COSMIC\CXSTM8\Lib\crtsi.sm8"
+# Put your files here
+<FILE_LIST>
+#
+# float and integer library names depend on the model used
+#
+"D:\Program Files (x86)\COSMIC\CXSTM8\Lib\libis.sm8"
+c:/cosmic/cxstm8/lib/libm.sm8			# machine library
+
++seg .vector -b 0x8000			# vectors start address
+# Put your interrupt vectors file here if needed
+<VECTOR_FILE>
+
+#
+# define these symbols if crtsi or crtsx is used
+#
++def __endzp=@.ubsct			# end of uninitialized zpage
++def __memory=@.bss			# end of bss segment

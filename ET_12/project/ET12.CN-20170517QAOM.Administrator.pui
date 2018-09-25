@@ -1,0 +1,25 @@
+[Folders]
+.\source\=1
+.\source\ - drivers=1
+.\source\ - etapps=1
+.\source\ - globals=1
+.\source\ - prjlnks=1
+.\source\ - startup=1
+
+[Open Files]
+Active File Display Mode=1
+Active File Index=1
+Open File Line0=64671
+Open File Line1=2
+Open File Pos0=65065
+Open File Pos1=302
+Open File Window Pos0=0,1,-1,-1,-1,-1,5,27,1132,724
+Open File Window Pos1=0,1,-1,-1,-1,-1,5,27,1132,724
+Open File0=.\source\etapps\main.c
+Open File1=.\build.bat
+Open File2=
+Remember Files=1
+
+[Project Information]
+Project Start=E107080006000C000D002D002C00000068
+Working Time=18643

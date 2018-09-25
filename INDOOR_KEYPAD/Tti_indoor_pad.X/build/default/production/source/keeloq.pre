@@ -1,0 +1,56 @@
+
+# 1 "source/keeloq.c"
+
+# 13 "source/type.h"
+typedef unsigned char u8;
+typedef unsigned short u16;
+
+typedef unsigned char U08ET;
+typedef unsigned short U16ET;
+typedef void VODET;
+
+typedef void (*FUN)(void);
+
+# 11 "source/keeloq.h"
+u8* ENcrypt(u8 *source, u8* _key);
+u8* DEcrypt(u8 *source, u8* _key);
+u8 getBit( u8 *source, u16 n);
+u8* RRC(u8 *source, u8 c, u8 n);
+u8* RLC(u8 *source, u8 c, u8 n);
+u8* LRN_MKEY(u8 *source, u8 *new_key);
+
+# 8 "source/keeloq.c"
+const u8 NLF[2][2][2][2][2]={0,1,1,1,0,1,0,0,
+0,0,1,0,1,1,1,0,
+0,0,1,1,1,0,1,0,
+0,1,0,1,1,1,0,0};
+
+# 79
+u8 * DEcrypt(u8 *source, u8* _key)
+{
+U08ET bitk[4], res;
+U16ET index;
+for(index=0; index<528; index++) {
+bitk[0] = NLF[getBit(source,30)][getBit(source,25)][getBit(source,19)][getBit(source, 8)][getBit(source,0)];
+bitk[1] = getBit(source, 15);
+bitk[2] = getBit(source, 31);
+bitk[3] = getBit(_key, (527-index)%64);
+res = bitk[0]^bitk[1]^bitk[2]^bitk[3];
+source[3] = (source[3]<<1) | (source[2]>>7);
+source[2] = (source[2]<<1) | (source[1]>>7);
+source[1] = (source[1]<<1) | (source[0]>>7);
+source[0] = (source[0]<<1) | (res);
+}
+return source;
+}
+
+# 105
+u8 getBit( u8* source, u16 n)
+{
+
+# 112
+return (source[n / 8] & (1 << (n % 8))) ? 1 : 0;
+
+# 120
+}
+

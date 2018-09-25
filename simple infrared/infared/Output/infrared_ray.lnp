@@ -1,0 +1,7 @@
+".\Output\main.obj",
+".\Output\Common.obj",
+".\Output\Delay.obj",
+".\Output\STARTUP.obj" 
+TO ".\Output\infrared_ray" 
+PRINT(".\LST\infrared_ray.m51") RAMSIZE(256) 
+DISABLEWARNING (16) 

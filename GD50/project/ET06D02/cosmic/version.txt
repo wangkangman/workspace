@@ -1,0 +1,18 @@
+--------------------------------
+STM8 COSMIC C Compiler
+Version: 4.2.4 Date: 19 Dec 2007
+--------------------------------
+COSMIC Software STM8 C Cross Compiler V4.2.4 - 19 Dec 2007 - Win32-F
+COSMIC Software STM8 C Parser V4.8.4 - 12 Dec 2007 - Win32-F
+COSMIC Software STM8 Code Generator V4.2.4 - 19 Dec 2007 - Win32-F
+COSMIC Software STM8 Optimizer V4.2.4 - 18 Dec 2007 - Win32
+COSMIC Software STM8 Macro-Assembler V4.5.2 - 29 Oct 2007 - Win32-F
+COSMIC Software Linker V4.6.20 - 18 Dec 2007 - Win32-F
+COSMIC Software Hexa Translator V4.3.12 - 15 Nov 2007 - Win32
+COSMIC Software Absolute Listing V4.3.12 - 15 Nov 2007 - Win32
+COSMIC Software Librarian V4.3.12 - 15 Nov 2007 - Win32
+COSMIC Software Absolute C Listing V4.3.12 - 15 Nov 2007 - Win32
+COSMIC Software Object Inspector V4.3.12 - 15 Nov 2007 - Win32
+COSMIC Software Print Debug Info V4.3.12 - 15 Nov 2007 - Win32
+COSMIC Software ELF/DWARF Converter V4.5.16 - 06 Dec 2007 - Win32
+COSMIC Software IEEE695 Converter V7.0.7 - 23 Mar 2006 - Win32
